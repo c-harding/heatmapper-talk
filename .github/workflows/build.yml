@@ -55,8 +55,6 @@ jobs:
         with:
           ref: gh-pages
           path: gh-pages
-          # Use PAT so the push triggers the deploy workflow
-          token: ${{ secrets.GH_PAT }}
 
       - name: Copy build to gh-pages
         run: |
