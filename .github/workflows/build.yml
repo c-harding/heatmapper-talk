@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: "build-${{ github.ref_name }}"
+  group: "build-${{ github.head_ref || github.ref_name }}"
   cancel-in-progress: true
 
 jobs:
@@ -48,7 +48,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build with Slidev
-        run: pnpm build --base ${{ steps.pages.outputs.base_path }}/${{ github.ref_name }}/
+        run: pnpm build --base ${{ steps.pages.outputs.base_path }}/${{ github.head_ref || github.ref_name }}/
 
       - name: Checkout gh-pages
         uses: actions/checkout@v4
@@ -58,7 +58,7 @@ jobs:
 
       - name: Copy build to gh-pages
         run: |
-          DEST="gh-pages/${{ github.ref_name }}"
+          DEST="gh-pages/${{ github.head_ref || github.ref_name }}"
           rm -rf "$DEST"
           mkdir -p "$DEST"
           rsync -a --delete dist/ "$DEST"/
@@ -72,7 +72,7 @@ jobs:
           if [[ $(git status --porcelain) ]]; then
             git config user.name "${{ github.actor }}"
             git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
-            git commit -m "Deploy ${{ github.ref_name }}@${{ github.sha }}"
+            git commit -m "Deploy ${{ github.head_ref || github.ref_name }}@${{ github.sha }}"
             # Retry loop to handle concurrent pushes from other branches.
             # `git push || git pull --rebase` is safe under set -e: the || prevents
             # a failed push from aborting the script before the rebase retry.
