@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path id="Spartan-A"
+              d="M19 1600l663 -1650h301l662 1650h-349l-140 -376h-648l-140 376h-349zM619 940h427l-214 -553z"/>
+        <path id="Spartan-W"
+              d="M518 1600l-475 -1650h360l312 1206l352 -1206h243l351 1206l312 -1206h361l-476 1650h-360l-310 -1025l-309 1025h-361z"/>
+        <path id="Spartan-R"
+              d="M225 1600v-1650h562q169 0 293.5 59.5t193 171t68.5 268.5q0 124 -44 223.5t-126 167.5t-199 101l540 659h-411l-476 -622h-77v622h-324zM549 708h138q101 0 171 -29t107.5 -85.5t37.5 -135.5q0 -120 -82.5 -184.5t-233.5 -64.5h-138v499z"/>
+        <path id="Spartan-E"
+              d="M225 1600v-1650h918v284h-594v397h570v284h-570v401h594v284h-918z"/>
+        <path id="Spartan-A-Semibold"
+              d="M52 1600l657 -1650h243l658 1650h-282l-162 -430h-670l-163 430h-281zM585 940h492l-247 -638z"/>
+        <path id="Spartan-W-Semibold"
+              d="M552 1600l-482 -1650h292l348 1295l399 -1295h198l400 1295l348 -1295h291l-481 1650h-292l-364 -1143l-365 1143h-292z"/>
+        <path id="Spartan-R-Semibold"
+              d="M241 1600v-1650h514q166 0 288.5 58t189 167t66.5 262q0 127 -47.5 227.5t-136 166.5t-212.5 92l543 677h-332l-494 -648h-117v648h-262zM503 732h175q109 0 187 -34.5t119.5 -99t41.5 -154.5q0 -134 -91.5 -209t-256.5 -75h-175v572z"/>
+        <path id="Spartan-E-Semibold"
+              d="M241 1600v-1650h887v230h-625v478h601v230h-601v482h625v230h-887z"/>
+        <path id="Spartan-F-Semibold"
+              d="M241 1600v-1650h893v230h-702l71 -62v630l-71 -90h658v230h-658l71 -90v802h-262z"/>
+        <path id="Spartan-G-Semibold"
+              d="M939 1632q-171 0 -318 -65.5t-257.5 -182t-172 -272.5t-61.5 -336q0 -171 57 -325.5t165 -273.5t261.5 -188t345.5 -69q116 0 227 27t209.5 77t177.5 121l-126 202q-90 -90 -220 -141.5t-266 -51.5q-131 0 -233 47t-172.5 131.5t-107 195t-36.5 237.5q0 137 41 251.5
+t114.5 199t171.5 130t211 45.5q92 0 178 -30t154 -86t108 -133t40 -170v-36h-496v-205h763v213q0 160 -64 287t-172.5 216.5t-243.5 137t-278 47.5z"/>
+        <path id="Spartan-I-Semibold"
+              d="M241 1600v-1650h262v1650h-262z"/>
+        <path id="Spartan-N-Semibold"
+              d="M241 1600v-1650h262l774 1211v-1211h262v1650h-262l-774 -1210v1210h-262z"/>
+        <path id="Spartan-O-Semibold"
+              d="M959 1632q-173 0 -324 -66t-265 -183.5t-178.5 -273t-64.5 -333.5q0 -179 64.5 -334t178.5 -272.5t265 -183.5t324 -66t324 66t265 183.5t178.5 272.5t64.5 334q0 178 -64.5 333.5t-178.5 273t-265 183.5t-324 66zM959 1380q118 0 218.5 -45.5t175 -127t115.5 -191.5
+t41 -240t-41 -240t-115.5 -191.5t-175 -127t-218.5 -45.5q-117 0 -217.5 45.5t-175 127t-115.5 191.5t-41 240t41 240t115.5 191.5t175 127t217.5 45.5z"/>
+        <path id="Spartan-T-Semibold"
+              d="M514 1600v-1417h-449v-233h1160v233h-450v1417h-261z"/>
+        <path id="Spartan-S-Semibold"
+              d="M664 1632q-119 0 -216 -30t-170.5 -74.5t-123.5 -89.5t-76 -74l138 -212q28 29 70.5 69t99.5 78.5t128 64t157 25.5q81 0 145 -27t102 -80.5t38 -132.5q0 -69 -28.5 -118t-81.5 -85.5t-126 -70t-163 -69.5q-64 -27 -126.5 -63t-113 -86t-80.5 -115.5t-30 -151.5
+q0 -93 36.5 -177.5t103.5 -150.5t159.5 -104t206.5 -38q93 0 181 27t160.5 70t118.5 92l-114 199q-38 -39 -90.5 -73.5t-116.5 -55.5t-134 -21q-82 0 -139 32t-87.5 83.5t-30.5 111.5q0 52 21.5 88.5t59.5 62.5t87.5 47.5t104.5 42.5q109 44 201.5 89.5t160.5 103t105.5 136
+t37.5 188.5q0 154 -73.5 264t-203 167.5t-298.5 57.5z"/>
+        <linearGradient id="background" gradientTransform="rotate(45)">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#ffffff"/>
+        </linearGradient>
+        <g id="qaware-q">
+            <circle id="q-circle" r="48" cx="60" cy="60" stroke-width="24" fill-opacity="0"/>
+            <rect id="q-tail" x="48" y="118" width="24" height="23"/>
+        </g>
+        <mask id="qaware-q-mask" fill="black" stroke="black">
+            <rect width="100%" height="100%" fill="white"/>
+            <use xlink:href="#qaware-q" transform="translate(41 32)"/>
+        </mask>
+        <g id="qa-text" fill="white" stroke="white">
+            <use xlink:href="#qaware-q" transform="translate(0 -1) scale(0.25) "/>
+            <use xlink:href="#Spartan-A" transform="translate(31 0) scale(0.018) "/>
+            <rect x="69" y="-6" width="5" height="41" />
+            <use xlink:href="#Spartan-W" transform="translate(81 0) scale(0.018) "/>
+            <use xlink:href="#Spartan-A" transform="translate(123 0) scale(0.018) "/>
+            <use xlink:href="#Spartan-R" transform="translate(153 0) scale(0.018) "/>
+            <use xlink:href="#Spartan-E" transform="translate(180 0) scale(0.018) "/>
+        </g>
+        <g id="se-text" fill="white" stroke="white">
+            <use xlink:href="#Spartan-S-Semibold" transform="translate(-0.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-O-Semibold" transform="translate(8.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-F-Semibold" transform="translate(20.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-T-Semibold" transform="translate(29.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-W-Semibold" transform="translate(38.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-A-Semibold" transform="translate(53.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-R-Semibold" transform="translate(64.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-E-Semibold" transform="translate(74.5 0) scale(0.007) "/>
+
+            <use xlink:href="#Spartan-E-Semibold" transform="translate(89.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-N-Semibold" transform="translate(98.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-G-Semibold" transform="translate(111 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-I-Semibold" transform="translate(123.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-N-Semibold" transform="translate(129 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-E-Semibold" transform="translate(141.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-E-Semibold" transform="translate(150.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-R-Semibold" transform="translate(160.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-I-Semibold" transform="translate(171.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-N-Semibold" transform="translate(176.5 0) scale(0.007) "/>
+            <use xlink:href="#Spartan-G-Semibold" transform="translate(188.4 0) scale(0.007) "/>
+        </g>
+    </defs>
+    <rect id="background-rectangle" x="0" y="0" width="200" height="200" rx="22" ry="22" fill="url('#background')" mask="url('#qaware-q-mask')" />
+
+    <use xlink:href="#qa-text" transform="translate(0,253)" />
+    <use xlink:href="#se-text" transform="translate(0,308)" />
+</svg>
