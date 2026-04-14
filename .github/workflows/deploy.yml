@@ -2,7 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   workflow_run:
-    workflows: ["Build Slidev site"]
+    workflows:
+      - "Build Slidev site"
+      - "Remove branch folder from gh-pages"
     types: [completed]
   workflow_dispatch:
 

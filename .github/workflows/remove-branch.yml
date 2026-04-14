@@ -1,11 +1,19 @@
 name: Remove branch folder from gh-pages
+run-name: "Remove branch folder '${{ inputs.branch || github.event.ref }}' from gh-pages${{ inputs.dry_run && ' (Dry run)' || '' }}"
 
-on: delete
+on:
+  delete:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch folder to remove"
+        required: true
+      dry_run:
+        description: "Dry run"
+        type: boolean
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: "pages"
@@ -19,23 +27,29 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: gh-pages
-          token: ${{ secrets.GH_PAT }}
 
       - name: Delete branch folder
-        run: rm -rf "${{ github.event.ref }}"
+        run: rm -rf "${{ inputs.branch || github.event.ref }}"
 
-      - name: Push to gh-pages
+      - name: Prepare changes
         run: |
           git add --all .
+          git status --short
+
+      - name: Push to gh-pages
+        if: ${{ !inputs.dry_run }}
+        run: |
           if [[ $(git status --porcelain) ]]; then
             git config user.name "${{ github.actor }}"
             git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
-            git commit -m "Cleanup ${{ github.event.ref }}@${{ github.sha }}"
+            git commit -m "Cleanup ${{ inputs.branch || github.event.ref }}@${{ github.sha }}"
             # Retry loop to handle concurrent pushes from other branches.
             # `git push || git pull --rebase` is safe under set -e: the || prevents
             # a failed push from aborting the script before the rebase retry.
-            for i in 1 2 3 4 5; do
-              git push && break || { echo "Push failed on attempt $i, retrying..." >&2; git pull --rebase; }
+            for i in 4 3 2 1 0; do
+              git push && break || [[ $i -eq 0 ]] && { echo "All push attempts failed" >&2; exit 1; }
+              echo "Push failed, $i retries left..." >&2
+              git pull --rebase
             done
           else
             echo "No changes, nothing to remove"

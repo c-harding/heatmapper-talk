@@ -84,8 +84,10 @@ jobs:
             # Retry loop to handle concurrent pushes from other branches.
             # `git push || git pull --rebase` is safe under set -e: the || prevents
             # a failed push from aborting the script before the rebase retry.
-            for i in 1 2 3 4 5; do
-              git push && break || { echo "Push failed on attempt $i, retrying..." >&2; git pull --rebase; }
+            for i in 4 3 2 1 0; do
+              git push && break || [[ $i -eq 0 ]] && { echo "All push attempts failed" >&2; exit 1; }
+              echo "Push failed, $i retries left..." >&2
+              git pull --rebase
             done
           else
             echo "No changes, nothing to deploy"
