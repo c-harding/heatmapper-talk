@@ -16,10 +16,6 @@ von GPX-Dateien zu skalierbarer Kartenplattform
 Charlie Harding
 <SmartLink to="charlie.harding@qaware.de"/>
 
-::footerRight::
-
-<a href="https://github.com/c-harding/heatmapper-talk" class="underline opacity-75 text-sm" target="_blank">Folien-Quelle</a>
-
 <!--
   Herzlich willkommen zu meinem Talk über Heatmapper.
   Es geht um digitale Transformation mit fremden APIs – von GPX-Dateien zu einer skalierbaren Kartenplattform.

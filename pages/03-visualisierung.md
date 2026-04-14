@@ -324,7 +324,7 @@ Lösung: Mehrere Layer
 -->
 
 ---
-title: Globe-Modus & 3D-Terrain
+title: Globusansicht & 3D-Terrain
 inner-split: 45
 ---
 
@@ -332,7 +332,7 @@ Mapbox hat danach neue Features eingeführt – kostenlos nutzbar mit wenigen Ze
 
 <v-click>
 
-### 🌍 Globe-Modus
+### 🌍 Globusansicht
 
 ```js
 map.setProjection('globe')
@@ -368,7 +368,7 @@ map.setTerrain({ source: 'terrain' })
   Mapbox hat danach kontinuierlich neue Features eingeführt – kostenlos nutzbar mit wenigen Zeilen Code.
   Das Schöne an einer gut abstrahierten Bibliothek: man profitiert davon fast automatisch.
 
-  [click] Globe-Modus: eine einzige Zeile Code, und die Karte wird zur Weltkugel – sobald man weit genug herauszoomt.
+  [click] Globusansicht: eine einzige Zeile Code, und die Karte wird zur Weltkugel – sobald man weit genug herauszoomt.
   Das ist besser als die Mercator-Projektion, die viele Online-Karten nutzen: Mercator verzerrt die Größen stark, vor allem in den polaren Regionen.
 
   [click] 3D-Terrain: ein paar Zeilen mehr, und die Karte bekommt echte Höhenprofile.

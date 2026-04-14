@@ -17,10 +17,15 @@ title: Was ich mitgenommen habe
 <v-clicks>
 
 - **Externe APIs sind Abhängigkeiten** – sie ändern sich, haben Limits, und man hat keinen Einfluss auf den Zeitplan
+
 - **Client-seitiger Zustand skaliert** – nicht jedes Problem braucht ein Backend mit Datenbank
+
 - **Heuristiken sind legitim** – solange man die Ausnahmefälle kennt und behandelt
+
 - **Compliance trifft alle** – auch Hobby-Projekte müssen Branding-Guidelines und Webhooks implementieren
+
 - **Externe Änderungen erzwingen Reaktionen** – wer früh kommuniziert, hat mehr Zeit zum Reagieren
+
 - **Eigene Software benutzen** – man findet Probleme nur, wenn man das Tool selbst nutzt
 
 </v-clicks>

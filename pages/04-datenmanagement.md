@@ -105,14 +105,14 @@ Die API sortiert nach **ID**, nicht nach Datum.
 ### Das Risiko
 
 Wenn `after: lastFetch`:
-- Neue Aktivitäten von heute ✅
-- Lauf heute, aber Garmin-Sync noch nicht abgeschlossen ❌ verpasst
-- Radtour von vor einer Woche, heute rückwirkend importiert ❌ verpasst
+- Neue Imports von heute: ✅
+- Gestrigen Lauf, wenn Garmin-Sync gestern noch nicht abgeschlossen war: ❌ verpasst
+- Radtour von vor einer Woche, heute rückwirkend importiert: ❌ verpasst
 
 </v-click>
 
 <!--
-  Der Delta-Ansatz hat einen Haken: die API sortiert nach ID, nicht nach Datum.
+Der Delta-Ansatz hat einen Haken: die API sortiert nach ID, nicht nach Datum.
 
   [click] IDs sind zwar inkrement, aber sie spiegeln nicht das tatsächliche Aktivitätsdatum wider.
   Wer eine alte Radtour heute von einem Garmin importiert, bekommt eine neue, hohe ID – aber das Datum liegt Jahre zurück.
@@ -120,7 +120,6 @@ Wenn `after: lastFetch`:
   [click] Wenn wir also nur `after: lastFetch` verwenden, gibt es zwei Fallen.
   Erstens: eine Tour, die vor lastFetch stattgefunden hat, aber erst danach zu Strava hochgeladen wurde – zum Beispiel weil die Sync von Garmin noch nicht abgeschlossen war, als wir die Seite geladen haben.
   Zweitens: eine Aktivität von vor einer Woche, die heute rückwirkend importiert wird.
-
 -->
 
 ---
@@ -270,9 +269,9 @@ API fast identisch – aber asynchron.
 
 ### Nachteil: Debugging
 
-- `localStorage` ist direkt in der Browser-Konsole lesbar und beschreibbar
-- `localforage` ist nur per Code nutzbar – nicht in der DevTools-Konsole
-- Chrome DevTools zeigt die IndexedDB-Inhalte an, aber: keine Queries, keine Variablenzuweisung
+- `localStorage` ist direkt in der Browser-Konsole lesbar.
+- `localforage` ist nur im Code mit der Library nutzbar.
+- Chrome DevTools zeigt die IndexedDB-Inhalte an, aber: keine Queries, keine Variablenzuweisung.
 
 </v-click>
 
@@ -299,4 +298,3 @@ API fast identisch – aber asynchron.
   Chrome zeigt zwar die IndexedDB-Inhalte an, aber man kann keine Queries ausführen und nichts in Variablen speichern.
   Das macht das manuelle Debuggen deutlich mühsamer.
 -->
-

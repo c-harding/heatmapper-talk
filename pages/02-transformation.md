@@ -432,13 +432,13 @@ inner-split: 55
 
 ### Übersichtsdaten statt GPS-Tracks
 
-Die API liefert ein **Array von Aktivitäten** – paginiert, bis zu 200 pro Anfrage.
+Die API liefert eine **Liste von Aktivitäten** — paginiert, bis zu 200 pro Request.
 
 <v-click>
 
 ### Encoded Polylines
 
-Die Route ist als **Encoded Polyline** kodiert – ein kompaktes Textformat (Google Polyline Algorithm), das GPS-Koordinaten stark komprimiert.
+Die Route ist als **Encoded Polyline** kodiert: Ein kompaktes Textformat, das GPS-Koordinaten stark komprimiert.
 
 Perfekt für Kartenvisualisierung: kein Detail-Endpoint nötig. Eine Aktivität ist jetzt bspw. 1,5 kB statt 3,6 MB.
 
@@ -464,7 +464,7 @@ Perfekt für Kartenvisualisierung: kein Detail-Endpoint nötig. Eine Aktivität 
 ]
 ```
 ```json {11-13}
-// GET /api/strava/activities?page=1&per_page=200
+// GET /api/strava/activities?per_page=200
 [
   {
     "id": 1234567890,
@@ -491,7 +491,7 @@ Perfekt für Kartenvisualisierung: kein Detail-Endpoint nötig. Eine Aktivität 
   Die Antwort ist paginiert: bis zu 200 Aktivitäten pro Anfrage.
 
   [click] Das Herzstück ist das Feld `map.summary_polyline`.
-  Das ist eine Encoded Polyline – ein von Google entwickeltes Format, das GPS-Koordinaten als kompakten ASCII-String kodiert.
+  Das ist eine Encoded Polyline (Google Polyline Algorithm) – ein von Google entwickeltes Format, das GPS-Koordinaten als kompakten ASCII-String kodiert.
   Eine Route mit hunderten Punkten wird zu einem kurzen String.
   Das ist genau das Format, das Kartenbibliotheken wie Mapbox direkt verstehen – kein Detail-Endpoint, keine großen Dateidownloads.
 

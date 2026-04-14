@@ -1,4 +1,4 @@
-.slidev-layout {
+.slidev-layout, .slidev-content {
   h2 {
     font-size: 1.5em;
   }
@@ -11,7 +11,7 @@
     font-size: 1.1em;
   }
 
-  h3 {
+  > h3:not(:first-child) {
     margin-top: 0.5em;
   }
 }

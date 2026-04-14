@@ -23,7 +23,9 @@ Strava kündigt an: **alle API-Apps müssen validiert werden.**
 <v-click>
 
 - Ziel: Sicherstellung, dass API-Guidelines eingehalten werden
+
 - App muss eingereicht und geprüft werden
+
 - Kein Bestehen = kein weiterer API-Zugriff
 
 </v-click>
@@ -55,9 +57,11 @@ left:
   hideHeader: true
   hideFooter: true
   class: bg-white! p-0!
+right:
+  full-color: true
 ---
 
-<img src="/media/updated-sidebar-header.png" class="w-full h-full object-contain">
+<img v-click="3" src="/media/updated-sidebar-header.png" class="w-full object-contain">
 
 
 ::right::
@@ -66,8 +70,8 @@ Die wichtigste Änderung: **offizielle Strava-Assets** verwenden.
 
 <v-click>
 
-- Eigene "Verbinden mit Strava"-Buttons: ❌
-- Offizielle Bilder von Strava: ✅
+- Eigene "Verbinden mit Strava"-Buttons: ✘
+- Offizielle Bilder von Strava: ✓
 - Farbgebung, Größe und Platzierung vorgegeben
 
 </v-click>
@@ -167,18 +171,25 @@ Falls nicht: lokalen Cache löschen.
 -->
 
 ---
-title: Strava & Garmin – Rechtsstreit mit Folgen
-image: /media/patent-klage.png
-class: bg-contain bg-left
+title: Strava & Garmin — Rechtsstreit mit Folgen
+title-side: right
+split: 50
+left:
+  image: /media/patent-klage.png
+  class: bg-contain bg-transparent!
+right:
+  full-color: true
 ---
 
 ::header::
 
 <span/>
 
-::footer::
+::right::
 
-<EndLink class="w-50% ml-auto" to="heise.de/news/Patentverletzungsklage-von-Strava-gegen-Garmin-wegen-Segments-und-Heatmaps-10712222.html" />
+<p class="!mt-auto">
+    <EndLink to="heise.de/news/Patentverletzungsklage-von-Strava-gegen-Garmin-wegen-Segments-und-Heatmaps-10712222.html" />
+</p>
 
 <!--
   Ende 2025 gab es wieder Post von Strava – diesmal mit größerem Hintergrund.
@@ -186,7 +197,7 @@ class: bg-contain bg-left
 -->
 
 ---
-title: Strava & Garmin – Rechtsstreit mit Folgen
+title: Strava & Garmin — Rechtsstreit mit Folgen
 ---
 
 Ende 2025: **Strava und Garmin verklagen einander.**
@@ -203,7 +214,7 @@ Diese gelten für alle Endabnehmer von Garmin-Daten — also für **Abnehmer der
 ### Die Anforderung
 
 Aktivitäten, die von einem Garmin-Gerät aufgezeichnet wurden,
-müssen explizit als solche **gekennzeichnet** werden.
+müssen explizit als solche **gekennzeichnet** werden, am besten mit dem Gerätenamen.
 
 </v-click>
 
