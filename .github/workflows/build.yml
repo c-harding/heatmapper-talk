@@ -62,6 +62,7 @@ jobs:
           rm -rf "$DEST"
           mkdir -p "$DEST"
           rsync -a --delete dist/ "$DEST"/
+          git add --all "$DEST"
 
       - name: Show changes
         working-directory: gh-pages
@@ -72,7 +73,6 @@ jobs:
         if: ${{ !inputs.dry_run }}
         working-directory: gh-pages
         run: |
-          git add --all .
           if [[ $(git status --porcelain) ]]; then
             git config user.name "${{ github.actor }}"
             git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
