@@ -47,11 +47,13 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
 
+      - name: Set hash router mode
+        run: |
+          sed -i '/^routerMode:/d' slides.md
+          sed -i '1a routerMode: hash' slides.md
+
       - name: Build with Slidev
         run: pnpm build --base ${{ steps.pages.outputs.base_path }}/${{ github.head_ref || github.ref_name }}/
-
-      - name: Add SPA 404 fallback
-        run: cp dist/index.html dist/404.html
 
       - name: Checkout gh-pages
         uses: actions/checkout@v4
