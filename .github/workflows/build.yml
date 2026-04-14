@@ -63,6 +63,10 @@ jobs:
           mkdir -p "$DEST"
           rsync -a --delete dist/ "$DEST"/
 
+      - name: Show changes
+        working-directory: gh-pages
+        run: git status --short
+
       - name: Push to gh-pages
         id: push
         if: ${{ !inputs.dry_run }}
