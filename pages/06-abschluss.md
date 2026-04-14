@@ -70,4 +70,5 @@ hideHeader: true
 
 ::right::
 
-<!-- TODO: add slides link once known -->
+<SmartLink to="github.com/c-harding/heatmapper"><mdi-github /> c-harding/heatmapper</SmartLink>
+<SmartLink to="github.com/c-harding/heatmapper-talk"><mdi-github /> c-harding/heatmapper-talk</SmartLink>

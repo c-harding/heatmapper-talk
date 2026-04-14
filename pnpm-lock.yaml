@@ -12,8 +12,8 @@ importers:
         specifier: ^1.2.3
         version: 1.2.3
       '@qaware-internal/slidev-theme-qaware':
-        specifier: ^1.3.3
-        version: 1.4.0(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))
+        specifier: ^1.5.0
+        version: 1.5.0(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))
       '@slidev/cli':
         specifier: ^52.14.1
         version: 52.14.2(@nuxt/kit@3.21.2)(@types/markdown-it@14.1.2)(@types/node@22.19.15)(@vue/compiler-sfc@3.5.31)(markdown-it@14.1.1)(postcss@8.5.8)
@@ -566,8 +566,8 @@ packages:
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
 
-  '@qaware-internal/slidev-theme-qaware@1.4.0':
-    resolution: {integrity: sha512-XbHbT/GU9qGjt5wg8w1QyRX9oA512Ivz23bcint8tQDRp996bbXUFZ5TSutE7EYvwifxCOCJMmw/7eNOJc176w==, tarball: https://npm.pkg.github.com/download/@qaware-internal/slidev-theme-qaware/1.4.0/b5d32612c59719748fc16be07b60b80f6eea6930}
+  '@qaware-internal/slidev-theme-qaware@1.5.0':
+    resolution: {integrity: sha512-fQOE5zrM2r2UQ0HuOdq9DyfIf2p/VW09YJTuusu+CzuPqJ/yhKSpdrLz32wkmAj3uY2qhlzw9YgqceUuqDlOtA==, tarball: https://npm.pkg.github.com/download/@qaware-internal/slidev-theme-qaware/1.5.0/2d4b4d1242265f25faee4982d1e135f59e24bff0}
     engines: {node: '>=18.0.0'}
 
   '@quansync/fs@1.0.0':
@@ -3411,7 +3411,7 @@ snapshots:
 
   '@polka/url@1.0.0-next.29': {}
 
-  '@qaware-internal/slidev-theme-qaware@1.4.0(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))':
+  '@qaware-internal/slidev-theme-qaware@1.5.0(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))':
     dependencies:
       '@iconify-json/bxl': 1.2.4
       '@slidev/types': 52.14.2(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))
