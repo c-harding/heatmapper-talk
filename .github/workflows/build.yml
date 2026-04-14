@@ -13,7 +13,7 @@ on:
         type: boolean
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: "build-${{ github.head_ref || github.ref_name }}"
@@ -50,6 +50,9 @@ jobs:
       - name: Build with Slidev
         run: pnpm build --base ${{ steps.pages.outputs.base_path }}/${{ github.head_ref || github.ref_name }}/
 
+      - name: Add SPA 404 fallback
+        run: cp dist/index.html dist/404.html
+
       - name: Checkout gh-pages
         uses: actions/checkout@v4
         with:
@@ -62,11 +65,12 @@ jobs:
           rm -rf "$DEST"
           mkdir -p "$DEST"
           rsync -a --delete dist/ "$DEST"/
-          git add --all "$DEST"
 
-      - name: Show changes
+      - name: Prepare changes
         working-directory: gh-pages
-        run: git status --short
+        run: |
+          git add --all .
+          git status --short
 
       - name: Push to gh-pages
         id: push
