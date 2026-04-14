@@ -3,7 +3,7 @@ layout: chapter
 title: Datenmanagement unter realen Constraints
 shortTitle: Datenmanagement
 section:
-  duration: 6m
+  duration: 4m30s
 ---
 
 Von LocalStorage zu IndexedDB
@@ -146,6 +146,7 @@ Das Startdatum der neuesten bekannten Aktivität statt `lastSync`.
 -->
 
 ---
+disabled: true
 title: Sonderfall – Routen
 inner-split: 50
 ---

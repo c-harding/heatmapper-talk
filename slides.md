@@ -3,7 +3,7 @@ theme: '@qaware-internal/slidev-theme-qaware'
 layout: ec26
 title: Heatmapper
 shortTitle: Titel
-duration: 25m
+duration: 20m
 section:
   duration: 1m
 endTime: '14:10'

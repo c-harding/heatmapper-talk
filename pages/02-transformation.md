@@ -3,7 +3,7 @@ layout: chapter
 title: Problem erkannt, Transformation gestartet
 shortTitle: Transformation
 section:
-  duration: 5m
+  duration: 4m
 ---
 
 Von der manuellen Papierkarte zur programmatischen API-Integration
@@ -440,7 +440,7 @@ flowchart LR
 Schauen wir uns nun die Architektur an.
   Im einfachsten Fall brauchen wir nur ein Frontend, ein Backend und eine Verbindung zur Strava-API.
 
-  [click] Als Frontend habe ich Vue.js gewählt, das Backend läuft in Node.js, sodass ich Code für Datenstrukturen zwischen Frontend und Backend teilen kann.
+  [click] Als Frontend habe ich Vue.js gewählt, das Backend läuft in Node.js.
 
   Die Verbindung zu Strava hat ein Rate Limit – ich möchte also wiederholte Anfragen minimieren.
 
@@ -450,7 +450,6 @@ Schauen wir uns nun die Architektur an.
 
   [click] Außerdem brauchen wir Karten.
   Das war kurz nachdem Google Maps sein Preismodell umgestellt hatte – die Kosten pro Seitenaufruf sind um das 14-Fache gestiegen.
-  Vielleicht erinnert ihr euch daran, wie plötzlich auf dutzenden Websites die Karten ausgegraut waren, mit der Meldung *„This page can't load Google Maps correctly."*
 
   [click] Strava selbst war vor kurzem auf Mapbox umgestiegen. Mapbox hat ein großzügiges kostenloses Kontingent, das ich bis heute nicht überschritten habe.
 
@@ -472,7 +471,7 @@ Die API liefert eine **Liste von Aktivitäten** — paginiert, bis zu 200 pro Re
 
 Die Route ist als **Encoded Polyline** kodiert: Ein kompaktes Textformat, das GPS-Koordinaten stark komprimiert.
 
-Perfekt für Kartenvisualisierung: kein Detail-Endpoint nötig. Eine Aktivität ist jetzt bspw. 1,5 kB statt 3,6 MB.
+Perfekt für Kartenvisualisierung: kein Detail-Endpoint nötig. Eine Aktivität ist jetzt bspw. 1,5 kB statt 3,6 MB.
 
 </v-click>
 
@@ -532,6 +531,7 @@ Was bekommt man von der Strava-API?
 
 ---
 title: Learnings – API-getriebene Architektur
+disabled: true
 ---
 
 <v-clicks>

@@ -3,7 +3,7 @@ layout: chapter
 title: Karten & Visualisierung
 shortTitle: Visualisierung
 section:
-  duration: 4m30s
+  duration: 4m
 ---
 
 Von klassischen Slippy Maps zu Vektor-basierten Karten
@@ -168,9 +168,6 @@ import { watch } from 'vue'
 const nav = useNav()
 const active = useIsSlideActive()
 
-// Auto-advance/rewind on click 1, with 1.2s delay to allow the code transition to complete.
-// This fixes a mismatch in the code animation.
-
 watch([active, nav.clicks], ([isActive, clicks], [wasActive, oldClicks]) => {
   if (isActive && clicks === 1 && wasActive) {
     const timer = setTimeout(() => {
@@ -288,11 +285,7 @@ Jetzt bauen wir die Anwendung zusammen.
 
   [click] Und darunter die Liste der Aktivitäten.
 
-  [click] Wir können nach unten scrollen und mehr Aktivitäten sehen.
-
-  [click] Es kann sogar viele Aktivitäten geben.
-
-  Jetzt müssen wir nur noch die Karte mit Leben füllen.
+  [click] [click] Die kann recht lang werden.
 -->
 
 ---
