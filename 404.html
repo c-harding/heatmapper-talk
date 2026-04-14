@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirect</title>
+    <script>
+        const base = '/heatmapper-talk/';
+        const segments = location.pathname.slice(base.length).split('/').filter(Boolean);
+
+        // Try progressively shorter paths (from longest to shortest) to find the branch folder.
+        // e.g. for "feature/something/4" try "feature/something/", then "feature/", then root.
+        async function findFolder() {
+            for (let i = segments.length; i > 0; i--) {
+                const folder = segments.slice(0, i).join('/') + '/';
+                const r = await fetch(base + folder);
+                if (r.ok) {
+                    const hash = '/' + segments.slice(i).join('/');
+                    return base + folder + '#' + hash;
+                }
+            }
+            return base;
+        }
+
+        findFolder().then(url => location.replace(url));
+    </script>
+</head>
+
+<body>
+    <p>Redirecting… <a href="/heatmapper-talk/main/">Go to main version</a></p>
+</body>
+
+</html>
