@@ -23,7 +23,7 @@ right:
 - Zoom: neuer Request, neue Kacheln
 - Bekannt aus: OpenStreetMap, Google Maps (alt), Leaflet
 
-<v-click at="+3">
+<v-click at="+2">
 
 ### Vektor-Karten
 - Server liefert **Geodaten** (Geometrien, Labels)
@@ -37,14 +37,14 @@ right:
 
 <div class="flex h-10em gap-4">
   <img src="/media/slippy-muc.png" class="h-full aspect-square" />
-  <div v-if="$clicks > 0" class="rounded-full overflow-hidden border-4 border-black w-10em h-10em">
-    <img src="/media/slippy-muc.png" class="aspect-square [image-rendering:pixelated] origin-[45%_75%] transition-transform" :class="{'scale-400': $clicks > 1}" />
+  <div v-click="1" class="rounded-full overflow-hidden border-4 border-black w-10em h-10em">
+    <img src="/media/slippy-muc.png" class="aspect-square [image-rendering:pixelated] origin-[45%_75%] transition-transform" :class="{'scale-400': $clicks >= 1}" />
   </div>
 </div>
 
-<div v-click="3" class="flex h-10em gap-4">
+<div v-click="2" class="flex h-10em gap-4">
   <img src="/media/vector-muc.png" class="h-full aspect-square" />
-  <div v-click="4" class="rounded-full overflow-hidden border-4 border-black w-10em h-10em bg-white">
+  <div v-click="3" class="rounded-full overflow-hidden border-4 border-black w-10em h-10em bg-white">
     <pre class="whitespace-pre-line break-all mr--1">01aaf7e0a0e77617465725f706f6c79676f6e7312251204000001011803221b098a16ee1d5202020810020600020102050000010307010500030f12251204000001021803221b09a016b01e52070d0403050101010109000106010608040a00120f12171204000001031803220d098617ec1f1a06120700030f0f12191204000001041803220f09ac17921d220e06040e130c0b1b0f12171204000001051803220d09d817a2191a061a0d0203150f121712040000</pre>
   </div>
 </div>
@@ -55,7 +55,7 @@ right:
   Der Server rendert die Karte als Bild und schickt sie Kachel für Kachel – der Browser zeigt sie nur an.
   Das ist einfach und gut etabliert, aber inflexibel.
 
-  [click] [click] So sieht eine Kachel aus, wenn man reinzoomt – sie wird pixelig, weil es ein Bild ist. Erst danach werden neue Kacheln geladen.
+  [click] So sieht eine Kachel aus, wenn man reinzoomt – sie wird pixelig, weil es ein Bild ist. Erst danach werden neue Kacheln geladen.
 
   [click] Moderne Vektor-Karten wie Mapbox GL funktionieren anders: Der Server schickt Rohdaten, und der Browser rendert die Karte selbst in WebGL.
   Das bedeutet: beliebiger Zoom ohne Qualitätsverlust, Rotation – und dynamisches Styling, das sich zur Laufzeit ändern lässt.
