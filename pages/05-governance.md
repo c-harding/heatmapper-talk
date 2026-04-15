@@ -92,7 +92,7 @@ Relativ einfach umzusetzen, aber kostet trotzdem Zeit, wenn man es nicht von Anf
 
   [click] Technisch kein großes Problem – aber ein guter Reminder, dass man bei API-Integrationen
   von Anfang an die Branding-Guidelines lesen sollte.
-  Ich hatte es nicht getan.
+  Das hatte ich nicht getan.
 -->
 
 ---
@@ -252,5 +252,5 @@ Ich musste also kurzfristig umbauen, um die neue Information konform darzustelle
   Bei mir: rund 3.000 Requests. Das war keine Option.
 
   [click] Strava hat das Feld dann doch noch in den Übersichtsdaten ergänzt – aber erst eine Woche vor der Frist.
-  Vermutlich nur weil ich, und viele andere Entwickler auch, den Support kontaktiert hatten.
+  Vermutlich nur, weil ich – und viele andere Entwickler – den Support kontaktiert hatte.
 -->

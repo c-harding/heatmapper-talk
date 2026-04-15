@@ -13,7 +13,7 @@ Von LocalStorage zu IndexedDB
 -->
 
 ---
-title: Das Problem mit Delta-Updates
+title: Delta-Updates
 inner-split: 50
 ---
 
@@ -90,13 +90,12 @@ ist es aber nicht.
 
 <v-click>
 
-### IDs ≠ Datum
+### Nachträgliche Uploads
 
-Die API sortiert nach **ID**, nicht nach Datum.
-
-- IDs werden per Increment vergeben
-- Aber: Aktivitäten können **nachträglich hochgeladen** werden
-- Eine alte Radtour, heute importiert → hohe ID, altes Datum
+- Aktivitäten können **nachträglich hochgeladen** werden
+- Die API filtert nach **Aktivitätsdatum**, nicht nach Upload-Datum
+- Eine alte Radtour, heute importiert → altes Datum
+- Liegt vor `lastFetch` → wird nie geladen
 
 </v-click>
 
@@ -105,21 +104,19 @@ Die API sortiert nach **ID**, nicht nach Datum.
 ### Das Risiko
 
 Wenn `after: lastFetch`:
-- Neue Imports von heute: ✅
-- Gestrigen Lauf, wenn Garmin-Sync gestern noch nicht abgeschlossen war: ❌ verpasst
-- Radtour von vor einer Woche, heute rückwirkend importiert: ❌ verpasst
+- Heutige Aktivität: ✅
+- Verspäteter Garmin-Sync von gestern: ❌
+- Alte Tour, heute importiert: ❌
 
 </v-click>
 
 <!--
-Der Delta-Ansatz hat einen Haken: die API sortiert nach ID, nicht nach Datum.
+  Der Delta-Ansatz hat einen Haken: Aktivitäten können nachträglich hochgeladen werden.
 
-  [click] IDs sind zwar inkrement, aber sie spiegeln nicht das tatsächliche Aktivitätsdatum wider.
-  Wer eine alte Radtour heute von einem Garmin importiert, bekommt eine neue, hohe ID – aber das Datum liegt Jahre zurück.
+  [click] Und die API filtert nach Aktivitätsdatum, nicht nach Upload-Datum.
+  Eine Radtour von letzter Woche, heute erst vom Garmin importiert, liegt also vor unserem `lastFetch`.
 
-  [click] Wenn wir also nur `after: lastFetch` verwenden, gibt es zwei Fallen.
-  Erstens: eine Tour, die vor lastFetch stattgefunden hat, aber erst danach zu Strava hochgeladen wurde – zum Beispiel weil die Sync von Garmin noch nicht abgeschlossen war, als wir die Seite geladen haben.
-  Zweitens: eine Aktivität von vor einer Woche, die heute rückwirkend importiert wird.
+  [click] Sie fällt durch den Filter und wird nie geladen.
 -->
 
 ---
@@ -146,7 +143,7 @@ ein kleines Überlappungsfenster, das nachträgliche Uploads abfängt.
 
 <v-click>
 
-**Wenn die Heuristik versagt:** Der Lade-Button wird durch einen Neu-Laden-Button ersetzt – der Nutzer kann den Cache manuell leeren und alles neu abfragen.
+**Wenn die Heuristik versagt:** Der Sync-Button wird durch einen Neuladen-Button löscht den Cache manuell leeren und alles neu abfragen.
 
 </v-click>
 
@@ -239,9 +236,9 @@ Nach mehreren Jahren und vielen Aktivitäten: **localStorage voll.**
 ### Lösung: IndexedDB
 
 - Echte Datenbank im Browser
-- Kein festes Größenlimit (nutzt Festplattenplatz)
-- Unterstützt strukturierte Objekte & Indizes
-- Abstraktion über `localforage`
+- Kein festes Größenlimit
+- Komplexe API,
+  - aber `localforage` bietet eine einfache Abstraktion
 
 </v-click>
 
@@ -257,8 +254,8 @@ localStorage.setItem('activities',
   JSON.stringify(activities))
 
 // Nachher
-await localforage.setItem(
-  'activities', activities)
+await localforage.setItem('activities',
+  activities)
 ```
 
 API fast identisch – aber asynchron.
@@ -271,13 +268,13 @@ API fast identisch – aber asynchron.
 
 - `localStorage` ist direkt in der Browser-Konsole lesbar.
 - `localforage` ist nur im Code mit der Library nutzbar.
-- Chrome DevTools zeigt die IndexedDB-Inhalte an, aber: keine Queries, keine Variablenzuweisung.
+- Chrome DevTools zeigt die IndexedDB-Inhalte zwar an, aber ohne JavaScript-Zugriff.
 
 </v-click>
 
 <!--
   Nach mehreren Jahren und vielen hundert Aktivitäten hat mich die nächste Grenze eingeholt.
-  Zum Glück bin ich selbst ein Power-User meines eigenen Tools – das Problem trat erst bei rund 3.000 Aktivitäten über mehr als 10 Jahre auf.
+  Zum Glück bin ich selbst ein Power-User von Strava – das Problem trat erst bei rund 3.000 Aktivitäten über mehr als 10 Jahre auf.
   Die meisten Nutzer hätten das nie erreicht.
 
   Der Fehler war ein QuotaExceededError beim Synchronisieren – aber weil ich dort keine ordentliche Fehlerbehandlung eingebaut hatte, ist er still untergegangen.
@@ -293,7 +290,7 @@ API fast identisch – aber asynchron.
   Ich hatte eh schon ein Konzept für Datenmigrationen eingebaut, um bei zukünftigen Änderungen die Datenstruktur anpassen zu können – das hat mir hier sehr geholfen.
 
   [click] Aber es gibt einen echten Nachteil beim Debugging.
-  Mit localStorage konnte ich im Browser direkt `localStorage.getItem('activities')` aufrufen, Daten in Variablen speichern, manuell filtern.
+  Mit localStorage konnte ich in der Browser-Konsole direkt `localStorage.getItem('activities')` aufrufen, Daten in Variablen speichern, manuell filtern.
   Mit localforage geht das nicht – die Library ist in der DevTools-Konsole nicht verfügbar.
   Chrome zeigt zwar die IndexedDB-Inhalte an, aber man kann keine Queries ausführen und nichts in Variablen speichern.
   Das macht das manuelle Debuggen deutlich mühsamer.

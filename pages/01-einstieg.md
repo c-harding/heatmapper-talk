@@ -4,7 +4,6 @@ title: Einstieg & Motivation
 ---
 
 <!--
-  Willkommen zum ersten Abschnitt.
   Bevor wir in die Technik einsteigen, möchte ich euch zeigen, wo das Ganze angefangen hat – und zwar ganz analog.
 -->
 
@@ -80,7 +79,7 @@ inner-split: 50
   - Die Karte zeigt nur einen geografischen Ausschnitt – alles außerhalb fehlt.
   - Man kann nicht nach Zeiträumen filtern.
   - Die Karte hat man nicht immer dabei.
-  - Und selbstverständig kostet es Zeit, jede Aktivität einzuzeichnen – obwohl die Daten längst digital vorhanden sind.
+  - Und selbstverständlich kostet es Zeit, jede Aktivität einzuzeichnen – obwohl die Daten längst digital vorhanden sind.
 
   [click] Wenn man das umdreht, sieht man sofort die Vorteile einer digitalen Lösung:
   - eine globale Darstellung
@@ -91,8 +90,7 @@ inner-split: 50
 -->
 
 ---
-title: Der Wendepunkt
-
+title: 'Der Wendepunkt: Von analog zu digital'
 split: 60
 right:
   image: /media/derive.jpg
@@ -100,8 +98,6 @@ right:
   articleClass: text-white flex flex-col justify-end text-right
   full-color: true
 ---
-
-## Von analog zu digital
 
 ### Die Erkenntnis
 
@@ -117,10 +113,8 @@ Entdeckung des Projekts <SmartLink to="github.com/erik/derive">**dérive**</Smar
 <v-click>
 
 ::blockquote{.font-serif}
-
 **GPX**  
 *GPS Exchange Format*. XML-basiertes Dateiformat für GPS-Tracks
-
 ::
 
 </v-click>
@@ -128,8 +122,8 @@ Entdeckung des Projekts <SmartLink to="github.com/erik/derive">**dérive**</Smar
 
 **Aber:** GPX-Export-Flow war umständlich...
 
-Mit DSGVO sogar noch komplizierter:  
-Statt schneller Exporte nur Massenexport
+Mit DSGVO sogar noch komplizierter:
+Statt schneller Exporte nur Massenexport in einer riesigen Datei
 
 </v-click>
 
@@ -153,5 +147,5 @@ Statt schneller Exporte nur Massenexport
 
   Mit der DSGVO wurde es sogar noch schlimmer – statt GPX-Export enthält der Massenexport alle Daten von ganz Strava. Der Prozess hat viel länger gedauert, und die resultierenden Dateien waren riesig und unhandlich – besonders auf dem Handy.
 
-  Das war der Punkt, an dem ich gesagt habe: Das muss besser gehen.
+  Das muss besser gehen.
 -->

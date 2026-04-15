@@ -19,15 +19,14 @@ right:
 ---
 
 ### Raster-Karten (Slippy Maps)
-- Karte wird als **Bild-Kacheln** geliefert (PNG)
-- Server rendert die Karte – Client zeigt sie nur an
+- Legacy-Ansatz: Server rendert **vorgefertigte Bild-Kacheln** (PNG)
 - Zoom: neuer Request, neue Kacheln
 - Bekannt aus: OpenStreetMap, Google Maps (alt), Leaflet
 
 <v-click at="+3">
 
 ### Vektor-Karten
-- Server liefert **Rohdaten** (Geometrien, Labels)
+- Server liefert **Geodaten** (Geometrien, Labels)
 - **Client rendert** die Karte in WebGL
 - Beliebiger Zoom, Rotation und Neigung
 - Dynamisches Styling zur Laufzeit
@@ -68,24 +67,23 @@ title: Von Encoded Polylines zur Karte
 inner-split: 50
 ---
 
-**Source** – die Datenschicht
+**Source**: die Datenschicht
 
 - Enthält Rohdaten (GeoJSON, Raster-Kacheln, …)
 - Unsere Activities: GeoJSON aus dekodierten Polylinien
 
 <v-click at="+2">
 
-**Layer** – die Darstellungsschicht
+**Layer**: die Darstellungsschicht
 
-- Referenziert eine Source
-- Definiert Typ (`line`, `fill`, `circle`, …) und Stil
-- Mehrere Layer pro Source möglich, ggf. mit Filtern
+- Definiert, wie eine Source dargestellt wird
+- Mehrere Layer pro Source möglich
 
 </v-click>
 
 <v-click>
 
-**Style** – der Kartenstil
+**Style**: der Kartenstil
 
 - Definiert Hintergrund, Straßen, Labels
 - Bestehen aus Source- und Layer-Definitionen
@@ -157,14 +155,12 @@ map.addLayer({
 ````
 
 <!--
-  Mapbox GL arbeitet mit drei Kernkonzepten: Source, Layer und Style.
-  Eine Source ist der Datenbehälter – unsere Activities kommen als GeoJSON mit dekodierten Polylinien rein.
+  Mapbox GL hat drei Kernkonzepte: Source, Layer und Style.
+  Unsere Activities kommen als GeoJSON-Source rein.
 
-  [click] Der Layer beschreibt, wie die Source aussehen soll: Typ, Farbe, Transparenz.
-  Mehrere Layer können dieselbe Source nutzen, ggf. mit Filtern.
+  [click] Der Layer definiert, wie die Daten aussehen – Typ, Farbe, Transparenz.
 
-  [click] Und alles baut auf einem Style auf: der Basiskarte, die Mapbox liefert.
-  Straßen, Beschriftungen, Hintergrund – alles fertig konfiguriert, abrufbar per URL. Mapbox kann diese Styles hosten, oder man kann eine eigene JSON-Datei mit individuellen Anpassungen bereitstellen.
+  [click] Und alles baut auf einem Style auf – einer Basiskarte, die man fertig laden oder selbst definieren kann.
 -->
 
 ---
@@ -251,15 +247,15 @@ transition: fade
 </div>
 
 <!--
-  Jetzt haben wir alle Zutaten parat und können die Anwendung bauen.
+  Jetzt bauen wir die Anwendung zusammen.
 
-  [click] Das Herzstück ist die Karte – die zeigen wir groß und in der Mitte.
+  [click] Das Herzstück ist die Karte.
 
-  [click] Dazu kommt eine Sidebar mit den Bedienelementen.
+  [click] Dazu eine Sidebar für die Bedienelemente.
 
-  [click] In der Sidebar gibt es ein Logo und einen Button zum Laden der Aktivitäten.
+  [click] Logo und Sync-Button.
 
-  [click] Darunter erscheint dann die Liste der geladenen Aktivitäten.
+  [click] Und darunter die Liste der Aktivitäten.
 
   [click] Wir können nach unten scrollen und mehr Aktivitäten sehen.
 
@@ -375,5 +371,5 @@ map.setTerrain({ source: 'terrain' })
   Wanderungen in den Alpen sehen plötzlich ganz anders aus – man sieht sofort, wie bergig eine Route war.
   Besonders beeindruckend in Kombination mit Satellitenbildern als Hintergrundkarte.
 
-  Das ist der Vorteil, wenn man auf eine gepflegte externe Bibliothek setzt: man bekommt neue Features geschenkt.
+  Das ist der Vorteil einer gepflegten externen Bibliothek: neue Features geschenkt.
 -->

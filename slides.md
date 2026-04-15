@@ -18,8 +18,8 @@ Charlie Harding
 
 <!--
   Herzlich willkommen zu meinem Talk über Heatmapper.
-  Es geht um digitale Transformation mit fremden APIs – von GPX-Dateien zu einer skalierbaren Kartenplattform.
-  Ich möchte euch anhand eines persönlichen Projekts zeigen, welche Herausforderungen und Learnings sich dabei ergeben.
+  Heatmapper zeigt all meine Sportaktivitäten auf einer interaktiven Karte — je mehr Routen sich überlagern, desto wärmer die Farbe.
+  Dabei bin ich auf einige spannende Probleme gestoßen — von API-Limits über Kartendarstellung bis hin zu Datenschutz.
 -->
 
 ---

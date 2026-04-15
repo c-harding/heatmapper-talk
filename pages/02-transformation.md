@@ -73,7 +73,7 @@ inner-split: 50
 ## Architektur-Prinzip
 
 ### Backend: So wenig wie möglich
-- Storage ist teuer, wenn die App skalieren soll
+- Storage ist teuer, wenn die App skaliert
 
 ### Ergebnis
 - Minimale Backend-Kosten
@@ -93,6 +93,9 @@ inner-split: 50
 title: Die Architektur im Überblick
 articleClass: justify-center
 ---
+
+<v-switch at="0">
+<template #0>
 
 ```mermaid
 ---
@@ -128,16 +131,8 @@ flowchart LR
     class StravaAPI,StravaDB external
 ```
 
-<!--
-  Schauen wir uns nun die Architektur an.
-  Im einfachsten Fall brauchen wir nur ein Frontend, ein Backend und eine Verbindung zur Strava-API.
-  Diese API holt dann die Daten aus Stravas Datenbank.
--->
-
----
-title: Die Architektur im Überblick
-articleClass: justify-center
----
+</template>
+<template #1>
 
 ```mermaid
 ---
@@ -150,13 +145,13 @@ flowchart LR
     User[👤 Nutzer]
 
     subgraph Heatmapper
-        Frontend[🖥️ Frontend \n Vue]
-        Backend[⚙️ Backend \n Node/Express]
+      Frontend[🖥️ Frontend \n Vue]
+      Backend[⚙️ Backend \n Node/Express]
     end
 
     subgraph Strava
-        StravaAPI[Strava API]
-        StravaDB[(Strava Datenbank)]
+      StravaAPI[Strava API]
+      StravaDB[(Strava Datenbank)]
     end
 
     User --> Frontend
@@ -173,15 +168,8 @@ flowchart LR
     class StravaAPI,StravaDB external
 ```
 
-<!--
-  Als Frontend habe ich Vue.js gewählt, da das 2020 die Frontend-Bibliothek war, mit der ich am meisten Erfahrung hatte.
-  Das Backend läuft in Node.js, sodass ich Code für Datenstrukturen zwischen Frontend und Backend teilen kann.
--->
-
----
-title: Die Architektur im Überblick
-articleClass: justify-center
----
+</template>
+<template #2>
 
 ```mermaid
 ---
@@ -194,13 +182,13 @@ flowchart LR
     User[👤 Nutzer]
 
     subgraph Heatmapper
-        Frontend[🖥️ Frontend \n Vue]
-        Backend[⚙️ Backend \n Node/Express]
+      Frontend[🖥️ Frontend \n Vue]
+      Backend[⚙️ Backend \n Node/Express]
     end
 
     subgraph Strava
-        StravaAPI[Strava API]
-        StravaDB[(Strava Datenbank)]
+      StravaAPI[Strava API]
+      StravaDB[(Strava Datenbank)]
     end
 
     User --> Frontend
@@ -217,15 +205,8 @@ flowchart LR
     class StravaAPI,StravaDB external
 ```
 
-<!--
-  Die Verbindung zu Strava hat ein Rate Limit und ist nicht besonders schnell.
-  Das heißt, ich möchte wiederholte Anfragen minimieren – es würde also helfen, Caching in die Architektur einzubauen.
--->
-
----
-title: Die Architektur im Überblick
-articleClass: justify-center
----
+</template>
+<template #3>
 
 ```mermaid
 ---
@@ -238,14 +219,14 @@ flowchart LR
     User[👤 Nutzer]
 
     subgraph Heatmapper
-        Frontend[🖥️ Frontend \n Vue]
-        Backend[⚙️ Backend \n Node/Express]
-        Database[(Datenbank)]
+      Frontend[🖥️ Frontend \n Vue]
+      Backend[⚙️ Backend \n Node/Express]
+      Database[(Datenbank)]
     end
 
     subgraph Strava
-        StravaAPI[Strava API]       
-        StravaDB[(Strava Datenbank)]
+      StravaAPI[Strava API]       
+      StravaDB[(Strava Datenbank)]
     end
 
     User --> Frontend
@@ -265,14 +246,8 @@ flowchart LR
     style Database stroke-dasharray: 5 5
 ```
 
-<!--
-  Ich könnte eine Datenbank ans Backend hängen, aber das würde bei Skalierung teuer werden und den Durchsatz im System erhöhen.
--->
-
----
-title: Die Architektur im Überblick
-articleClass: justify-center
----
+</template>
+<template #4>
 
 ```mermaid
 ---
@@ -285,14 +260,14 @@ flowchart LR
     User[👤 Nutzer]
 
     subgraph Heatmapper
-        Frontend[🖥️ Frontend \n Vue]
-        Backend[⚙️ Backend \n Node/Express]
-        LocalStorage[(Local Storage)]
+      Frontend[🖥️ Frontend \n Vue]
+      Backend[⚙️ Backend \n Node/Express]
+      LocalStorage[(Local Storage)]
     end
 
     subgraph Strava
-        StravaAPI[Strava API]
-        StravaDB[(Strava Datenbank)]
+      StravaAPI[Strava API]
+      StravaDB[(Strava Datenbank)]
     end
 
     User --> Frontend
@@ -310,15 +285,8 @@ flowchart LR
     class StravaAPI,StravaDB external
 ```
 
-<!--
-  Inzwischen bieten moderne Browser gute Speichermöglichkeiten.
-  Da die Daten eines einzelnen Nutzers nicht besonders groß sind, sollten sie in den Local Storage passen.
--->
-
----
-title: Die Architektur im Überblick
-articleClass: justify-center
----
+</template>
+<template #5>
 
 ```mermaid
 ---
@@ -331,14 +299,14 @@ flowchart LR
     User[👤 Nutzer]
 
     subgraph Heatmapper
-        Frontend[🖥️ Frontend \n Vue]
-        Backend[⚙️ Backend \n Node/Express]
-        LocalStorage[(Local Storage)]
+      Frontend[🖥️ Frontend \n Vue]
+      Backend[⚙️ Backend \n Node/Express]
+      LocalStorage[(Local Storage)]
     end
 
     subgraph Strava
-        StravaAPI[Strava API]
-        StravaDB[(Strava Datenbank)]
+      StravaAPI[Strava API]
+      StravaDB[(Strava Datenbank)]
     end
 
     Maps[🗺️ Karten]
@@ -361,17 +329,8 @@ flowchart LR
     class Maps mapbox
 ```
 
-<!--
-  In diesem Diagramm fehlt noch etwas: Wir brauchen Karten.
-
-  Das war kurz nachdem Google Maps sein Preismodell umgestellt hatte – das kostenlose Kontingent wurde massiv reduziert und die Kosten pro Seitenaufruf sind im Schnitt um das 14-fache gestiegen.
-  Vielleicht erinnert ihr euch daran, wie plötzlich auf dutzenden Websites die Karten ausgegraut ware, mit der Meldung *„This page can't load Google Maps correctly.“*
--->
-
----
-title: Die Architektur im Überblick
-articleClass: justify-center
----
+</template>
+<template #6>
 
 ```mermaid
 ---
@@ -384,19 +343,19 @@ flowchart LR
     User[👤 Nutzer]
 
     subgraph Heatmapper
-        Frontend[🖥️ Frontend \n Vue]
-        Backend[⚙️ Backend \n Node/Express]
-        LocalStorage[(Local Storage)]
+      Frontend[🖥️ Frontend \n Vue]
+      Backend[⚙️ Backend \n Node/Express]
+      LocalStorage[(Local Storage)]
     end
 
     subgraph Mapbox
-        MapboxGL[Mapbox GL JS]
-        MapData[(Kartendaten)]
+      MapboxGL[Mapbox GL JS]
+      MapData[(Kartendaten)]
     end
 
     subgraph Strava
-        StravaAPI[Strava API]
-        StravaDB[(Strava Datenbank)]
+      StravaAPI[Strava API]
+      StravaDB[(Strava Datenbank)]
     end
 
 
@@ -419,8 +378,31 @@ flowchart LR
     class MapboxGL,MapData mapbox
 ```
 
+</template>
+</v-switch>
+
 <!--
-  Strava selbst war kurz zuvor ebenfalls auf eine Alternative umgestiegen: Mapbox.
+  Schauen wir uns nun die Architektur an.
+  Im einfachsten Fall brauchen wir nur ein Frontend, ein Backend und eine Verbindung zur Strava-API.
+  Diese API holt dann die Daten aus Stravas Datenbank.
+
+  [click] Als Frontend habe ich Vue.js gewählt, da das 2020 die Frontend-Bibliothek war, mit der ich am meisten Erfahrung hatte.
+  Das Backend läuft in Node.js, sodass ich Code für Datenstrukturen zwischen Frontend und Backend teilen kann.
+
+  [click] Die Verbindung zu Strava hat ein Rate Limit und ist nicht besonders schnell.
+  Das heißt, ich möchte wiederholte Anfragen minimieren – es würde also helfen, Caching in die Architektur einzubauen.
+
+  [click] Ich könnte eine Datenbank ans Backend hängen, aber das würde bei Skalierung teuer werden und den Durchsatz im System erhöhen.
+
+  [click] Inzwischen bieten moderne Browser gute Speichermöglichkeiten.
+  Da die Daten eines einzelnen Nutzers nicht besonders groß sind, sollten sie in den Local Storage passen.
+
+  [click] In diesem Diagramm fehlt noch etwas: Wir brauchen Karten.
+
+  Das war kurz nachdem Google Maps sein Preismodell umgestellt hatte – das kostenlose Kontingent wurde massiv reduziert und die Kosten pro Seitenaufruf sind im Schnitt um das 14-fache gestiegen.
+  Vielleicht erinnert ihr euch daran, wie plötzlich auf dutzenden Websites die Karten ausgegraut ware, mit der Meldung *„This page can't load Google Maps correctly.“*
+
+  [click] Strava selbst war kurz zuvor ebenfalls auf eine Alternative umgestiegen: Mapbox.
   Mapbox hatte ein großzügiges kostenloses Kontingent – so großzügig, dass ich es bis heute nicht überschritten habe.
   Und es hatte den Vorteil, dass die Karten in Heatmapper genauso aussehen wie in Strava selbst.
 -->
@@ -507,10 +489,14 @@ title: Learnings – API-getriebene Architektur
 <v-clicks>
 
 - **APIs schlagen Datei-Exports** — direkter Zugriff ist robuster, nutzerfreundlicher und DSGVO-konformer
+
 - **Nur das abrufen, was man braucht** — Summary-Daten reichen; kein Detail-Endpoint, keine riesigen Dateidownloads
+
 - **Backend so minimal wie möglich** — Zustand gehört zum Client, nicht zum Server
+
 - **Externe Abhängigkeiten haben Kosten** — Rate Limits, Pricing-Änderungen und Compliance-Anforderungen müssen eingeplant werden
-- **Externe Änderungen erzwingen Anpassungen** — wer auf fremde APIs baut, baut auf fremden Entscheidungen. Kein Interface-Contract, kein SLA, der Pricing oder Datenstruktur festschreibt – Strava bestimmt.
+
+- **Externe Änderungen erzwingen Anpassungen** — wer auf fremde APIs baut, baut auf fremden Entscheidungen. Kein Interface-Contract, kein SLA, der Pricing oder Datenstruktur festschreibt — Strava bestimmt.
 
 </v-clicks>
 

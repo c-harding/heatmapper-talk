@@ -3,7 +3,7 @@ layout: chapter
 title: Takeaways
 ---
 
-Was bleibt – für Hobby-Projekte und Enterprise-Software
+Learnings für Hobby-Projekte und Enterprise-Software
 
 <!--
   Ein kleines Projekt, das über Jahre gewachsen ist.
@@ -14,13 +14,13 @@ Was bleibt – für Hobby-Projekte und Enterprise-Software
 title: Was ich mitgenommen habe
 ---
 
-<v-clicks>
-
-- **Externe APIs sind Abhängigkeiten** – sie ändern sich, haben Limits, und man hat keinen Einfluss auf den Zeitplan
+<v-clicks at="+0">
 
 - **Client-seitiger Zustand skaliert** – nicht jedes Problem braucht ein Backend mit Datenbank
 
 - **Heuristiken sind legitim** – solange man die Ausnahmefälle kennt und behandelt
+
+- **Externe APIs sind Abhängigkeiten** – sie ändern sich, haben Limits, und man hat keinen Einfluss auf den Zeitplan
 
 - **Compliance trifft alle** – auch Hobby-Projekte müssen Branding-Guidelines und Webhooks implementieren
 
@@ -33,14 +33,14 @@ title: Was ich mitgenommen habe
 <!--
   Was nehme ich mit – und was lässt sich auf Enterprise-Projekte übertragen?
 
-  [click] Externe APIs sind Abhängigkeiten mit eigenem Lebenszyklus.
-  Rate Limits, Pricing-Änderungen, neue Guidelines – das muss von Anfang an eingeplant werden.
-
   [click] Client-seitiger Zustand ist keine Notlösung.
   Wenn Daten nur einem Nutzer gehören, gehören sie in dessen Browser – nicht auf einen Server.
 
   [click] Heuristiken sind kein Zeichen schwacher Architektur.
   Manchmal ist eine pragmatische Näherungslösung mit bekannten Ausnahmen besser als eine komplexe perfekte Lösung.
+
+  Externe APIs sind Abhängigkeiten mit eigenem Lebenszyklus.
+  Rate Limits, Pricing-Änderungen, neue Guidelines – das muss von Anfang an eingeplant werden.
 
   [click] Compliance betrifft auch kleine Projekte.
   Wer fremde APIs nutzt, ist Vertragspartner – mit allen Pflichten, die dazugehören.
@@ -55,7 +55,12 @@ title: Was ich mitgenommen habe
 
 ---
 layout: end
-hideHeader: true
+---
+
+<div class="text-200px font-bold">Q&A</div>
+
+---
+layout: end
 ---
 
 ::middle::
@@ -75,5 +80,5 @@ hideHeader: true
 
 ::right::
 
-<SmartLink to="github.com/c-harding/heatmapper"><mdi-github /> c-harding/heatmapper</SmartLink>
+<SmartLink to="github.com/c-harding/heatmapper"><mdi-github /> c-harding/heatmapper</SmartLink><br />
 <SmartLink to="github.com/c-harding/heatmapper-talk"><mdi-github /> c-harding/heatmapper-talk</SmartLink>
