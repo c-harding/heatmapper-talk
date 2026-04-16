@@ -1,6 +1,8 @@
 ---
 layout: chapter
 title: Karten & Visualisierung
+shortTitle: Visualisierung
+sectionDuration: 4m
 ---
 
 Von klassischen Slippy Maps zu Vektor-basierten Karten

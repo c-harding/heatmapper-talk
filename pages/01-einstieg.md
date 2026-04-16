@@ -1,6 +1,7 @@
 ---
 layout: chapter
 title: Einstieg & Motivation
+sectionDuration: 2m
 ---
 
 <!--

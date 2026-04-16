@@ -12,11 +12,14 @@ importers:
         specifier: ^1.2.3
         version: 1.2.3
       '@qaware-internal/slidev-theme-qaware':
-        specifier: ^1.5.1
-        version: 1.5.1(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))
+        specifier: ^1.6.0
+        version: 1.6.0(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))
       '@slidev/cli':
         specifier: ^52.14.1
         version: 52.14.2(@nuxt/kit@3.21.2)(@types/markdown-it@14.1.2)(@types/node@22.19.15)(@vue/compiler-sfc@3.5.31)(markdown-it@14.1.1)(postcss@8.5.8)
+      '@slidev/client':
+        specifier: ^52.14.2
+        version: 52.14.2(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
@@ -574,8 +577,8 @@ packages:
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
 
-  '@qaware-internal/slidev-theme-qaware@1.5.1':
-    resolution: {integrity: sha512-9kDxbrJ5LEe0jXirUxm3Cu4IcK/61C92PRGOGUQHWOIV3Xl8cTTWKRvQTIJuKRGwRnAcTAEV3tecqIJ2cQ1MoQ==, tarball: https://npm.pkg.github.com/download/@qaware-internal/slidev-theme-qaware/1.5.1/64c4cd9c97b85bfc1dd833864a0ce579e408b2c4}
+  '@qaware-internal/slidev-theme-qaware@1.6.0':
+    resolution: {integrity: sha512-j9wEBwbnofb/znBVxZ5xZBifKWXhqR6zz+iQvZnIzUkmAlOemug1LKC49RZpq9FWR++hD3/qom+IC7aQtq6sFQ==, tarball: https://npm.pkg.github.com/download/@qaware-internal/slidev-theme-qaware/1.6.0/d970f2687b257c838743dcda27da00304e541560}
     engines: {node: '>=18.0.0'}
 
   '@quansync/fs@1.0.0':
@@ -3432,7 +3435,7 @@ snapshots:
 
   '@polka/url@1.0.0-next.29': {}
 
-  '@qaware-internal/slidev-theme-qaware@1.5.1(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))':
+  '@qaware-internal/slidev-theme-qaware@1.6.0(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))':
     dependencies:
       '@iconify-json/bxl': 1.2.4
       '@slidev/types': 52.14.2(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))

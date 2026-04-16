@@ -9,8 +9,9 @@
   },
   "dependencies": {
     "@iconify-json/mdi": "^1.2.3",
-    "@qaware-internal/slidev-theme-qaware": "^1.5.1",
+    "@qaware-internal/slidev-theme-qaware": "^1.6.0",
     "@slidev/cli": "^52.14.1",
+    "@slidev/client": "^52.14.2",
     "qrcode": "^1.5.4",
     "vue": "^3.5.29"
   },

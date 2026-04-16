@@ -1,6 +1,8 @@
 ---
 layout: chapter
 title: Datenmanagement unter realen Constraints
+shortTitle: Datenmanagement
+sectionDuration: 4m30s
 ---
 
 Von LocalStorage zu IndexedDB

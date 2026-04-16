@@ -1,6 +1,8 @@
 ---
 layout: chapter
 title: Governance, Compliance & externe Abhängigkeiten
+shortTitle: Governance
+sectionDuration: 4m
 ---
 
 Wenn externe Plattformen die Regeln ändern
