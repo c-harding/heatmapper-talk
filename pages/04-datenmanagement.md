@@ -8,7 +8,7 @@ sectionDuration: 6m
 Von LocalStorage zu IndexedDB
 
 <!--
-  So viel zur Darstellung. Aber eine schöne Karte bringt nichts ohne aktuelle Daten.
+So viel zur Darstellung. Aber eine schöne Karte bringt nichts ohne aktuelle Daten.
   Und genau da wird es tricky: Caching, Delta-Updates und die Grenzen des Browsers.
 -->
 
@@ -22,17 +22,13 @@ inner-split: 50
 ````md magic-move {at:2}
 ```js
 async function loadActivities() {
-  return await fetchStrava(
-    '/api/strava/activities'
-  )
+  return await fetchStrava('/api/strava/activities');
 }
 ```
+
 ```js
 async function loadActivities(lastSync) {
-  return await fetchStrava(
-    '/api/strava/activities',
-    { after: lastSync }
-  )
+  return await fetchStrava('/api/strava/activities', { after: lastSync });
 }
 ```
 ````
@@ -61,7 +57,7 @@ async function loadActivities(lastSync) {
 </v-click>
 
 <!--
-  Wir haben unsere Aktivitäten im LocalStorage – aber wie hält man den Cache aktuell?
+Wir haben unsere Aktivitäten im LocalStorage – aber wie hält man den Cache aktuell?
   Der naive Ansatz: bei jeder Sync alles neu laden.
 
   [click] Das Problem: Die Strava-API liefert maximal 200 Aktivitäten pro Request.
@@ -70,7 +66,6 @@ async function loadActivities(lastSync) {
   [click] Die bessere Lösung: ein Delta-Update.
   Die API unterstützt einen `after`-Parameter – man fragt also nur ab, was seit der letzten Synchronisation neu dazugekommen ist.
 -->
-
 
 ---
 title: Das Problem mit dem Zeitstempel
@@ -129,7 +124,7 @@ Das Startdatum der neuesten bekannten Aktivität statt `lastSync`.
 />
 
 <!--
-  `after: lastSync` klingt nach einer einfachen Lösung – aber in der Praxis steckt der Teufel im Detail.
+`after: lastSync` klingt nach einer einfachen Lösung – aber in der Praxis steckt der Teufel im Detail.
   Schauen wir uns ein konkretes Beispiel an.
 
   Am Dienstag bin ich laufen gegangen, habe die Aktivität anschließend zu Strava importiert, und dann meine Daten in den Heatmapper synchronisiert.
@@ -198,7 +193,7 @@ await syncRoutes()
 </v-click>
 
 <!--
-  Neben Aktivitäten bietet Strava auch Routen-Planung – und ich wollte die ebenfalls auf der Karte sehen.
+Neben Aktivitäten bietet Strava auch Routen-Planung – und ich wollte die ebenfalls auf der Karte sehen.
   Klingt einfach, aber die API macht hier einen Strich durch die Rechnung.
 
   [click] Der Routen-Endpoint unterstützt keinen Zeitfilter: weder nach Erstelldatum noch nach letzter Änderung.
@@ -261,7 +256,7 @@ Nach mehreren Jahren und vielen Aktivitäten: **localStorage voll.**
 </v-click>
 
 <!--
-  Nach mehreren Jahren hat mich die nächste Grenze eingeholt.
+Nach mehreren Jahren hat mich die nächste Grenze eingeholt.
   Das Problem ist erst bei rund 3.000 Aktivitäten über mehr als 10 Jahre aufgetreten — ich bin selbst Power-User von Strava.
 
   Der Fehler war ein QuotaExceededError beim Synchronisieren, der still untergegangen ist.

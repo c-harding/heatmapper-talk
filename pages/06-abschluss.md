@@ -7,7 +7,7 @@ sectionDuration: 1m
 Learnings für Hobby-Projekte und Enterprise-Software
 
 <!--
-  Zum Schluss: Was lässt sich aus diesem Hobby-Projekt mitnehmen – auch für Enterprise-Software?
+Zum Schluss: Was lässt sich aus diesem Hobby-Projekt mitnehmen – auch für Enterprise-Software?
 -->
 
 ---
@@ -27,7 +27,7 @@ title: Was ich mitgenommen habe
 </v-clicks>
 
 <!--
-  Client-seitiger Zustand ist keine Notlösung.
+Client-seitiger Zustand ist keine Notlösung.
   Nicht jedes Problem braucht ein Backend mit Datenbank.
 
   [click] Externe APIs sind Abhängigkeiten mit eigenem Lebenszyklus.

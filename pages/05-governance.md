@@ -8,7 +8,7 @@ sectionDuration: 3m30s
 Wenn externe Plattformen die Regeln ändern
 
 <!--
-  Jetzt wird es weniger technisch: Was passiert, wenn die Plattform die Regeln ändert –
+Jetzt wird es weniger technisch: Was passiert, wenn die Plattform die Regeln ändert –
   und man plötzlich nicht mehr nur Entwickler ist, sondern auch Vertragspartner?
 -->
 
@@ -36,7 +36,7 @@ Bis die Frist näher rückte.
 </v-click>
 
 <!--
-  Irgendwann ist von Strava die Ankündigung gekommen: alle API-Apps müssen validiert werden.
+Irgendwann ist von Strava die Ankündigung gekommen: alle API-Apps müssen validiert werden.
   Das betrifft nicht nur große Firmen, sondern auch kleine Hobby-Projekte wie meines.
 
   [click] Der Prozess: App einreichen, Strava prüft, ob die Guidelines eingehalten werden.
@@ -60,7 +60,6 @@ right:
 
 <img v-click="2" src="/media/updated-sidebar-header.png" class="w-full object-contain">
 
-
 ::right::
 
 Die wichtigste Änderung: **offizielle Strava-Assets** verwenden.
@@ -74,7 +73,7 @@ Die wichtigste Änderung: **offizielle Strava-Assets** verwenden.
 </v-click>
 
 <!--
-  Die größte technische Änderung war das Branding.
+Die größte technische Änderung war das Branding.
   Ich hatte eigene Buttons gebaut – das ist laut Guidelines nicht erlaubt.
   Strava stellt offizielle Assets bereit.
 
@@ -113,7 +112,7 @@ Im Frontend: Token-Gültigkeit prüfen, bei Bedarf Cache leeren.
 </v-click>
 
 <!--
-  Das Ganze hatte aber nicht gereicht.
+Das Ganze hatte aber nicht gereicht.
   Die eigentliche Hürde war nicht das Branding – sondern Webhooks.
   Strava erwartet, dass Apps auf Deauthorisierungs-Events reagieren.
 
@@ -146,7 +145,7 @@ right:
 </p>
 
 <!--
-  Aber es war nicht das letzte Mal, dass Strava die Spielregeln geändert hat.
+Aber es war nicht das letzte Mal, dass Strava die Spielregeln geändert hat.
   Ende 2025 gab es wieder Post – diesmal mit größerem Hintergrund.
   Strava und Garmin hatten sich gegenseitig verklagt.
 -->
@@ -183,7 +182,7 @@ Strava hat das Feld erst **eine Woche vor der Frist** in den Übersichtsdaten er
 </v-click>
 
 <!--
-  Kurz danach ist die zweite Meldung gekommen: Strava und Garmin haben sich geeinigt.
+Kurz danach ist die zweite Meldung gekommen: Strava und Garmin haben sich geeinigt.
   Als Teil dieser Einigung hat Garmin neue Developer Guidelines eingeführt.
 
   [click] Diese gelten auch für alle, die die Strava-API nutzen.

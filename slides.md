@@ -1,5 +1,5 @@
 ---
-theme: "@qaware-internal/slidev-theme-qaware"
+theme: '@qaware-internal/slidev-theme-qaware'
 layout: ec26
 title: Heatmapper
 shortTitle: Titel
@@ -23,7 +23,7 @@ Charlie Harding
 <SmartLink to="charlie.harding@qaware.de"/>
 
 <!--
-  Herzlich willkommen zu meinem Talk über ein Hobby-Projekt von mir, namens Heatmapper.
+Herzlich willkommen zu meinem Talk über ein Hobby-Projekt von mir, namens Heatmapper.
   Ich habe diese App gebaut, um all meine Sportaktivitäten auf einer interaktiven Karte zu zeigen.
   Dabei bin ich auf einige spannende Probleme gestoßen — von API-Limits über Kartendarstellung bis hin zu Datenschutz.
 -->
@@ -55,7 +55,7 @@ Läufer/Trailrunner und Wanderer {v-click}
 </v-switch>
 
 <!--
-  Kurz zu mir: Ich bin Charlie, Senior Software Engineer im Projekt CaVORS.
+Kurz zu mir: Ich bin Charlie, Senior Software Engineer im Projekt CaVORS.
 
   [click] Ich baue gerne Frontends,
 
@@ -81,7 +81,7 @@ disabled: true
 6. **Takeaways** — Learnings für Hobby und Enterprise
 
 <!--
-  Kurzer Überblick: Wir starten mit der Motivation, schauen uns dann Architektur und Visualisierung an,
+Kurzer Überblick: Wir starten mit der Motivation, schauen uns dann Architektur und Visualisierung an,
   gehen auf Datenmanagement ein und enden mit Governance und den wichtigsten Takeaways.
 -->
 

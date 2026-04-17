@@ -6,17 +6,17 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: "Branch folder to remove"
+        description: 'Branch folder to remove'
         required: true
       dry_run:
-        description: "Dry run"
+        description: 'Dry run'
         type: boolean
 
 permissions:
   contents: write
 
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:

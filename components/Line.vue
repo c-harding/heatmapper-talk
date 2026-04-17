@@ -8,7 +8,19 @@ interface Layer {
 
 const GRID_STEP = 20;
 
-const {count = 1, width, layers, color, opacity} = defineProps<{count?: number, width?: number, layers?: Layer[], color?:string, opacity?: number}>()
+const {
+  count = 1,
+  width,
+  layers,
+  color,
+  opacity,
+} = defineProps<{
+  count?: number;
+  width?: number;
+  layers?: Layer[];
+  color?: string;
+  opacity?: number;
+}>();
 
 const resolvedWidth = computed(() => width || count + 1);
 
@@ -17,11 +29,13 @@ const resolvedLayer = computed(() => {
     return layers;
   }
 
-  return [{
-    color: color || 'currentColor',
-    opacity: opacity || 1
-  }]
-})
+  return [
+    {
+      color: color || 'currentColor',
+      opacity: opacity || 1,
+    },
+  ];
+});
 
 const totalWidth = computed(() => resolvedWidth.value * GRID_STEP);
 
@@ -29,7 +43,6 @@ function makePath(i: number) {
   const offset = i * GRID_STEP;
 
   return `M${offset},4 a 12,12 0 0 0 12,12 H ${totalWidth.value}`;
-
 }
 
 const viewBox = computed(() => `0 0 ${totalWidth.value} 20`);
@@ -38,7 +51,7 @@ const viewBox = computed(() => `0 0 ${totalWidth.value} 20`);
 <template>
   <svg :viewBox="viewBox">
     <template v-for="(layer, j) in resolvedLayer" :key="j">
-      <path 
+      <path
         v-for="i of count"
         :key="i"
         fill="transparent"

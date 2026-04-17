@@ -8,7 +8,7 @@ sectionDuration: 4m30s
 Von klassischen Slippy Maps zu Vektor-basierten Karten
 
 <!--
-  Die Architektur steht, die API liefert Daten – jetzt kommt der sichtbarste Teil: die Karte.
+Die Architektur steht, die API liefert Daten – jetzt kommt der sichtbarste Teil: die Karte.
   Wie funktionieren moderne Web-Karten, und wie wird aus rohen Polylines eine Heatmap?
 -->
 
@@ -20,6 +20,7 @@ right:
 ---
 
 ### Raster-Karten (Slippy Maps)
+
 - Legacy-Ansatz: Server rendert **vorgefertigte Bild-Kacheln** (PNG)
 - Zoom: neuer Request, neue Kacheln
 - Bekannt aus: OpenStreetMap, Google Maps (alt), Leaflet
@@ -27,6 +28,7 @@ right:
 <v-click at="+2">
 
 ### Vektor-Karten
+
 - Server liefert **Geodaten** (Geometrien, Labels)
 - **Client rendert** die Karte per WebGL
 - Beliebiger Zoom, Rotation und Neigung
@@ -51,7 +53,7 @@ right:
 </div>
 
 <!--
-  Bevor wir eine Heatmap bauen können, müssen wir verstehen, wie Web-Karten überhaupt funktionieren.
+Bevor wir eine Heatmap bauen können, müssen wir verstehen, wie Web-Karten überhaupt funktionieren.
   Es gibt zwei Generationen – und der Unterschied ist entscheidend:
 
   Raster-Karten, auch Slippy Maps genannt. Der Server rendert die Karte als Bild, der Browser zeigt sie nur an.
@@ -98,24 +100,27 @@ map.addSource('activities', {
   type: 'geojson',
   data: {
     type: 'FeatureCollection',
-    features: activities.map(a => ({
+    features: activities.map((a) => ({
       type: 'Feature',
       geometry: {
         type: 'LineString',
-        coordinates:
-          decode(a.map.summary_polyline)
-            .map(([lat, lng]) => [lng, lat])
-      }
-    }))
-  }
-})
+        coordinates: decode(a.map.summary_polyline).map(([lat, lng]) => [
+          lng,
+          lat,
+        ]),
+      },
+    })),
+  },
+});
 ```
+
 ```js
 map.addSource('activities', {
   type: 'geojson',
   data: { ... }
 })
 ```
+
 ```js {6-14}
 map.addSource('activities', {
   type: 'geojson',
@@ -132,6 +137,7 @@ map.addLayer({
   }
 })
 ```
+
 ```js {1-3}
 const map = new mapboxgl.Map({
   style: 'mapbox://styles/mapbox/streets-v12',
@@ -179,7 +185,7 @@ watch([active, nav.clicks], ([isActive, clicks], [wasActive, oldClicks]) => {
 </script>
 
 <!--
-  Mapbox GL hat drei Kernkonzepte: Source, Layer und Style.
+Mapbox GL hat drei Kernkonzepte: Source, Layer und Style.
   Unsere Activities kommen als GeoJSON-Source rein.
 
   [click:2] Der Layer definiert, wie die Daten aussehen – beispielsweise Farbe, Transparenz.
@@ -271,7 +277,7 @@ transition: fade
 </div>
 
 <!--
-  Jetzt bauen wir die Anwendung zusammen.
+Jetzt bauen wir die Anwendung zusammen.
 
   [click] Das Herzstück ist die Karte.
 
@@ -296,7 +302,7 @@ pageClass: bg-transparent bg-contain
 ---
 
 <!--
-  Tada! So hat die erste Version von Heatmapper ausgesehen.
+Tada! So hat die erste Version von Heatmapper ausgesehen.
 -->
 
 ---
@@ -335,7 +341,7 @@ Mehrere halbtransparente Layer übereinander:
 </v-click>
 
 <!--
-  Je mehr Routen sich überlagern, desto wärmer wird die Farbe. Daher kommt das Wort „Heatmap“. Aber wie funktioniert das technisch?
+Je mehr Routen sich überlagern, desto wärmer wird die Farbe. Daher kommt das Wort „Heatmap“. Aber wie funktioniert das technisch?
 
   [click] Die Lösung: Drei halbtransparente Layer übereinander.
   Blau mit 75 % Opacity, Rot mit 20 % und Gelb mit 10 %.
@@ -355,7 +361,7 @@ Mapbox hat danach neue Features eingeführt – kostenlos nutzbar mit wenigen Ze
 ### 🌍 Globusansicht
 
 ```js
-map.setProjection('globe')
+map.setProjection('globe');
 ```
 
 </v-click>
@@ -366,9 +372,9 @@ map.setProjection('globe')
 ```js
 map.addSource('terrain', {
   type: 'raster-dem',
-  url: 'mapbox://mapbox.terrain-rgb'
-})
-map.setTerrain({ source: 'terrain' })
+  url: 'mapbox://mapbox.terrain-rgb',
+});
+map.setTerrain({ source: 'terrain' });
 ```
 
 </v-click>
@@ -385,7 +391,7 @@ map.setTerrain({ source: 'terrain' })
 </v-switch>
 
 <!--
-  Mapbox hat danach neue Features eingeführt – kostenlos nutzbar mit wenigen Zeilen Code.
+Mapbox hat danach neue Features eingeführt – kostenlos nutzbar mit wenigen Zeilen Code.
 
   [click] Globusansicht: eine einzige Zeile, und die Karte wird zur Weltkugel.
 

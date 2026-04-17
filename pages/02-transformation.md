@@ -8,7 +8,7 @@ sectionDuration: 5m
 Von der manuellen Papierkarte zur programmatischen API-Integration
 
 <!--
-  Wir haben also das Problem erkannt.
+Wir haben also das Problem erkannt.
   Aber *wie* wurde aus der analogen Papierkarte eine programmatische API-Integration?
 -->
 
@@ -28,7 +28,7 @@ Entdeckung des Projekts <SmartLink to="github.com/erik/derive">**dérive**</Smar
 
 ::blockquote{.font-serif.my-2}
 **GPX**  
-*GPS Exchange Format*. XML-basiertes Dateiformat für GPS-Tracks
+_GPS Exchange Format_. XML-basiertes Dateiformat für GPS-Tracks
 ::
 
 ::right::
@@ -36,7 +36,7 @@ Entdeckung des Projekts <SmartLink to="github.com/erik/derive">**dérive**</Smar
 (<SmartLink to="https://github.com/erik/derive"><mdi-github/> erik/derive</SmartLink>)
 
 <!--
-  Den ersten Anstoß hat mir dérive gegeben — ein Open-Source-Projekt, das GPX-Dateien auf einer Karte darstellt.
+Den ersten Anstoß hat mir dérive gegeben — ein Open-Source-Projekt, das GPX-Dateien auf einer Karte darstellt.
   Gefühlt war es genau das, was ich gesucht habe. Aber in der Praxis gab es ein Problem.
 -->
 
@@ -123,7 +123,7 @@ flowchart LR
 </div>
 
 <!--
-  dérive basiert auf GPX-Dateien — man muss also seine Daten aus Strava exportieren.
+dérive basiert auf GPX-Dateien — man muss also seine Daten aus Strava exportieren.
 
   [click] Durch die DSGVO gab es aber nur noch einen Massenexport aller Daten – nicht nur GPX-Daten.
   Das heißt: eine Stunde warten, ZIP herunterladen, entpacken, importieren – auf dem Handy praktisch unmöglich.
@@ -148,7 +148,8 @@ right:
 **Problem:** API-Tokens von Strava dürfen nicht im Frontend gespeichert werden
 
 **Lösung:** Backend nur für Token-Management
-- **Strava OAuth-Flow** abwickeln  
+
+- **Strava OAuth-Flow** abwickeln
 - **API-Token sicher speichern**
 - **Session-Token** ans Frontend weiterreichen
 
@@ -169,7 +170,7 @@ right:
 </v-click>
 
 <!--
-  Die API-Integration steht also als Richtung fest. Aber wie sieht die Umsetzung aus?
+Die API-Integration steht also als Richtung fest. Aber wie sieht die Umsetzung aus?
 
   [click] Die erste Frage war: Brauchen wir ein Backend?
 
@@ -213,9 +214,9 @@ flowchart LR
     StravaAPI --> StravaDB
 
     classDef minimal fill:#e1f5fe
-    classDef frontend fill:#f3e5f5  
+    classDef frontend fill:#f3e5f5
     classDef external fill:#fff3e0
-    
+
     class Backend minimal
     class Frontend frontend
     class StravaAPI,StravaDB external
@@ -250,9 +251,9 @@ flowchart LR
     StravaAPI --> StravaDB
 
     classDef minimal fill:#e1f5fe
-    classDef frontend fill:#f3e5f5  
+    classDef frontend fill:#f3e5f5
     classDef external fill:#fff3e0
-    
+
     class Backend minimal
     class Frontend frontend
     class StravaAPI,StravaDB external
@@ -278,7 +279,7 @@ flowchart LR
     end
 
     subgraph Strava
-      StravaAPI[Strava API]       
+      StravaAPI[Strava API]
       StravaDB[(Strava Datenbank)]
     end
 
@@ -289,9 +290,9 @@ flowchart LR
     StravaAPI --> StravaDB
 
     classDef minimal fill:#e1f5fe
-    classDef frontend fill:#f3e5f5  
+    classDef frontend fill:#f3e5f5
     classDef external fill:#fff3e0
-    
+
     class Backend minimal
     class Frontend frontend
     class StravaAPI,StravaDB external
@@ -330,9 +331,9 @@ flowchart LR
     StravaAPI --> StravaDB
 
     classDef minimal fill:#e1f5fe
-    classDef frontend fill:#f3e5f5  
+    classDef frontend fill:#f3e5f5
     classDef external fill:#fff3e0
-    
+
     class Backend minimal
     class Frontend,LocalStorage frontend
     class StravaAPI,StravaDB external
@@ -372,10 +373,10 @@ flowchart LR
     StravaAPI --> StravaDB
 
     classDef minimal fill:#e1f5fe
-    classDef frontend fill:#f3e5f5  
+    classDef frontend fill:#f3e5f5
     classDef external fill:#fff3e0
     classDef mapbox fill:#e8f5e9
-    
+
     class Backend minimal
     class Frontend,LocalStorage frontend
     class StravaAPI,StravaDB external
@@ -421,10 +422,10 @@ flowchart LR
     StravaAPI --> StravaDB
 
     classDef minimal fill:#e1f5fe
-    classDef frontend fill:#f3e5f5  
+    classDef frontend fill:#f3e5f5
     classDef external fill:#fff3e0
     classDef mapbox fill:#e8f5e9
-    
+
     class Backend minimal
     class Frontend,LocalStorage frontend
     class StravaAPI,StravaDB external
@@ -435,7 +436,7 @@ flowchart LR
 </v-switch>
 
 <!--
-  Schauen wir uns nun die Architektur an.
+Schauen wir uns nun die Architektur an.
   Im einfachsten Fall brauchen wir nur ein Frontend, ein Backend und eine Verbindung zur Strava-API.
 
   [click] Als Frontend habe ich Vue.js gewählt, das Backend läuft in Node.js, sodass ich Code für Datenstrukturen zwischen Frontend und Backend teilen kann.
@@ -493,6 +494,7 @@ Perfekt für Kartenvisualisierung: kein Detail-Endpoint nötig. Eine Aktivität 
   ...
 ]
 ```
+
 ```json {11-13}
 // GET /api/strava/activities?per_page=200
 [
@@ -516,7 +518,7 @@ Perfekt für Kartenvisualisierung: kein Detail-Endpoint nötig. Eine Aktivität 
 ````
 
 <!--
-  Was bekommt man von der Strava-API?
+Was bekommt man von der Strava-API?
   Keine GPX-Dateien – stattdessen kompakte JSON-Objekte, paginiert mit bis zu 200 pro Anfrage.
 
   [click] Das Herzstück: `map.summary_polyline` – eine Encoded Polyline, und die GPS-Koordinaten als kompakten String kodiert.
@@ -546,7 +548,7 @@ title: Learnings – API-getriebene Architektur
 </v-clicks>
 
 <!--
-  Fassen wir die wichtigsten Learnings zusammen.
+Fassen wir die wichtigsten Learnings zusammen.
 
   [click] APIs sind Datei-Exporten klar überlegen – robuster, direkter und unabhängig von manuellen Schritten.
 
@@ -558,4 +560,3 @@ title: Learnings – API-getriebene Architektur
 
   [click] Und schließlich: Wer auf fremde APIs und Dienste baut, muss mit externen Änderungen rechnen – und die Architektur so gestalten, dass man darauf reagieren kann.
 -->
-
