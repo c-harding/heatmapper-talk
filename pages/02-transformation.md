@@ -2,7 +2,7 @@
 layout: chapter
 title: Problem erkannt, Transformation gestartet
 shortTitle: Transformation
-sectionDuration: 3m30s
+sectionDuration: 5m
 ---
 
 Von der manuellen Papierkarte zur programmatischen API-Integration

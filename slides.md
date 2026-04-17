@@ -3,7 +3,7 @@ theme: "@qaware-internal/slidev-theme-qaware"
 layout: ec26
 title: Heatmapper
 shortTitle: Titel
-duration: 20m
+duration: 25m
 sectionDuration: 1m
 end-time: '14:10'
 author: Charlie Harding · QAware GmbH
