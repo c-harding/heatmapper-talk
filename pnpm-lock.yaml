@@ -26,6 +26,13 @@ importers:
       vue:
         specifier: ^3.5.29
         version: 3.5.31(typescript@5.9.3)
+    devDependencies:
+      prettier:
+        specifier: ^3.8.3
+        version: 3.8.3
+      prettier-plugin-slidev:
+        specifier: ^1.0.5
+        version: 1.0.5(prettier@3.8.3)
 
 packages:
 
@@ -796,12 +803,20 @@ packages:
     resolution: {integrity: sha512-fwBEbYkYFCwu1SWgknOYD5eD561rmCPxYteklhT0k+KnitLXMN5EpcM50TnoZ6IElfeMiwMv4Nq5f13L0OyCjw==}
     engines: {node: '>=20.12.0'}
 
+  '@slidev/parser@0.47.5':
+    resolution: {integrity: sha512-KvqOEhIFuMDu8CjAsehMNKlAnnmAn2TRHiEymc3CMadid05oWa5zgTxqEyMxUl2rjWpYs3A1yDiendZsGYs3HA==}
+    engines: {node: '>=18.0.0'}
+
   '@slidev/parser@52.14.2':
     resolution: {integrity: sha512-HxKhO6ULub45A4nSkDIcnlfnNkARCJfmVKnpvoSn4R/QG9wRa29cGiOOR6PUT9atDZF+LEqisoUTLqiZp0NH0Q==}
     engines: {node: '>=20.12.0'}
 
   '@slidev/rough-notation@0.1.0':
     resolution: {integrity: sha512-a/CbVmjuoO3E4JbUr2HOTsXndbcrdLWOM+ajbSQIY3gmLFzhjeXHGksGcp1NZ08pJjLZyTCxfz1C7v/ltJqycA==}
+
+  '@slidev/types@0.47.5':
+    resolution: {integrity: sha512-X67V4cCgM0Sz50bP8GbVzmiL8DHC2IXvdKcsN7DlxHyf+/T4d9GveeGukwha5Fx3MuYeGZWKag7TFL2ZY4w54A==}
+    engines: {node: '>=18.0.0'}
 
   '@slidev/types@52.14.2':
     resolution: {integrity: sha512-ucQbadhsg6IjidEmZevNGBxLlW6i2JS8YkIRwpFDKRMg7oJdi6mztp2Zq/Ca4hFdVr3iBo1Atny6ov0qUKE22A==}
@@ -2326,6 +2341,16 @@ packages:
   pptxgenjs@4.0.1:
     resolution: {integrity: sha512-TeJISr8wouAuXw4C1F/mC33xbZs/FuEG6nH9FG1Zj+nuPcGMP5YRHl6X+j3HSUnS1f3at6k75ZZXPMZlA5Lj9A==}
 
+  prettier-plugin-slidev@1.0.5:
+    resolution: {integrity: sha512-1xaKzOAX17QAcn1roUgQIAfeio3HPYYefCgzxh6Bzk+5rJJxq0I8HUhLrUyv9nCpIP6e9CDv/yDQSdEeqqRUuA==}
+    peerDependencies:
+      prettier: ^3.2.4
+
+  prettier@3.8.3:
+    resolution: {integrity: sha512-7igPTM53cGHMW8xWuVTydi2KO233VFiTNyF5hLJqpilHfmn8C8gPf+PS7dUT64YcXFbiMGZxS9pCSxL/Dxm/Jw==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
 
@@ -3778,6 +3803,11 @@ snapshots:
       - svelte
       - vite
 
+  '@slidev/parser@0.47.5':
+    dependencies:
+      '@slidev/types': 0.47.5
+      js-yaml: 4.1.1
+
   '@slidev/parser@52.14.2(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))':
     dependencies:
       '@antfu/utils': 9.3.0
@@ -3802,6 +3832,8 @@ snapshots:
   '@slidev/rough-notation@0.1.0':
     dependencies:
       roughjs: 4.6.6
+
+  '@slidev/types@0.47.5': {}
 
   '@slidev/types@52.14.2(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))':
     dependencies:
@@ -5698,6 +5730,13 @@ snapshots:
       https: 1.0.0
       image-size: 1.2.1
       jszip: 3.10.1
+
+  prettier-plugin-slidev@1.0.5(prettier@3.8.3):
+    dependencies:
+      '@slidev/parser': 0.47.5
+      prettier: 3.8.3
+
+  prettier@3.8.3: {}
 
   process-nextick-args@2.0.1: {}
 
