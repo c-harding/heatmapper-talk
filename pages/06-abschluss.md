@@ -7,8 +7,7 @@ sectionDuration: 1m
 Learnings für Hobby-Projekte und Enterprise-Software
 
 <!--
-  Ein kleines Projekt, das über Jahre gewachsen ist.
-  Aber die Probleme, die ich dabei gelöst habe, sind dieselben, die wir auch in Enterprise-Projekten kennen.
+  Zum Schluss: Was lässt sich aus diesem Hobby-Projekt mitnehmen – auch für Enterprise-Software?
 -->
 
 ---
@@ -19,38 +18,26 @@ title: Was ich mitgenommen habe
 
 - **Client-seitiger Zustand skaliert** – nicht jedes Problem braucht ein Backend mit Datenbank
 
-- **Heuristiken sind legitim** – solange man die Ausnahmefälle kennt und behandelt
-
 - **Externe APIs sind Abhängigkeiten** – sie ändern sich, haben Limits, und man hat keinen Einfluss auf den Zeitplan
 
-- **Compliance trifft alle** – auch Hobby-Projekte müssen Branding-Guidelines und Webhooks implementieren
-
-- **Externe Änderungen erzwingen Reaktionen** – wer früh kommuniziert, hat mehr Zeit zum Reagieren
+- **Compliance trifft alle** – wer fremde APIs nutzt, ist Vertragspartner
 
 - **Eigene Software benutzen** – man findet Probleme nur, wenn man das Tool selbst nutzt
 
 </v-clicks>
 
 <!--
-  Was nehme ich mit – und was lässt sich auf Enterprise-Projekte übertragen?
+  Client-seitiger Zustand ist keine Notlösung.
+  Nicht jedes Problem braucht ein Backend mit Datenbank.
 
-  [click] Client-seitiger Zustand ist keine Notlösung.
-  Wenn Daten nur einem Nutzer gehören, gehören sie in dessen Browser – nicht auf einen Server.
-
-  [click] Heuristiken sind kein Zeichen schwacher Architektur.
-  Manchmal ist eine pragmatische Näherungslösung mit bekannten Ausnahmen besser als eine komplexe perfekte Lösung.
-
-  Externe APIs sind Abhängigkeiten mit eigenem Lebenszyklus.
+  [click] Externe APIs sind Abhängigkeiten mit eigenem Lebenszyklus.
   Rate Limits, Pricing-Änderungen, neue Guidelines – das muss von Anfang an eingeplant werden.
 
   [click] Compliance betrifft auch kleine Projekte.
   Wer fremde APIs nutzt, ist Vertragspartner – mit allen Pflichten, die dazugehören.
 
-  [click] Frühzeitige Kommunikation hilft.
-  Wer ein Problem erkennt und meldet, hat mehr Zeit und mehr Einfluss auf die Lösung.
-
-  [click] Und das Wichtigste: eigene Software benutzen.
-  Ich habe Bugs und Grenzen nur gefunden, weil ich Heatmapper selbst täglich nutze.
+  [click] Und das Wichtigste: die eigene Software auch benutzen.
+  Ich habe Bugs und Grenzen nur gefunden, weil ich Heatmapper selbst regelmäßig nutze.
   Dogfooding ist kein Luxus – es ist die ehrlichste Form von Qualitätssicherung.
 -->
 

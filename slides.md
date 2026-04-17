@@ -10,6 +10,8 @@ author: Charlie Harding · QAware GmbH
 authorUrl: qaware.de
 articleClass: mr-55%
 comark: true
+htmlAttrs:
+  lang: de-DE
 ---
 
 Digitale Transformation mit fremden APIs —
@@ -21,8 +23,8 @@ Charlie Harding
 <SmartLink to="charlie.harding@qaware.de"/>
 
 <!--
-  Herzlich willkommen zu meinem Talk über Heatmapper.
-  Heatmapper zeigt all meine Sportaktivitäten auf einer interaktiven Karte — je mehr Routen sich überlagern, desto wärmer die Farbe.
+  Herzlich willkommen zu meinem Talk über ein Hobby-Projekt von mir, namens Heatmapper.
+  Ich habe diese App gebaut, um all meine Sportaktivitäten auf einer interaktiven Karte zu zeigen.
   Dabei bin ich auf einige spannende Probleme gestoßen — von API-Limits über Kartendarstellung bis hin zu Datenschutz.
 -->
 
@@ -37,20 +39,13 @@ right:
 Senior Software Engineer  
 bei QAware GmbH, München
 
-<v-click>
+Frontend-begeistert {v-click}
 
-Frontend-begeistert
-
-</v-click>
-<v-click>
-
-Läufer/Trailrunner und Wanderer
-
-</v-click>
+Läufer/Trailrunner und Wanderer {v-click}
 
 ::right::
 
-<v-switch at="0">
+<v-switch at="1">
 <template #0-2>
 <img src="/media/cha.jpeg"  class="rounded-full w-70 mx-auto" />
 </template>
@@ -60,12 +55,34 @@ Läufer/Trailrunner und Wanderer
 </v-switch>
 
 <!--
-  Kurz zu mir: Ich bin Charlie Harding, Senior Software Engineer im Projekt CaVORS.
+  Kurz zu mir: Ich bin Charlie, Senior Software Engineer im Projekt CaVORS.
 
-  [click] Ich bin baue gerne Frontends,
+  [click] Ich baue gerne Frontends,
 
-  [click] und in meiner Freizeit viel draußen unterwegs – beim Laufen, Trailrunning und Wandern.
+  [click] und bin in meiner Freizeit viel draußen unterwegs – beim Laufen, Trailrunning und Wandern.
   Und genau diese Kombination aus Tech und Outdoor hat zu dem Projekt geführt, über das ich heute spreche.
+-->
+
+---
+title: Agenda
+disabled: true
+---
+
+1. **Einstieg & Motivation** — von der Papierkarte zum digitalen Projekt
+
+2. **Transformation & Architektur** — API statt Datei-Export
+
+3. **Karten & Visualisierung** — Mapbox, Layer und Heatmap-Farben
+
+4. **Datenmanagement** — Caching, Delta-Updates und Browser-Limits
+
+5. **Governance & Compliance** — wenn die Plattform die Regeln ändert
+
+6. **Takeaways** — Learnings für Hobby und Enterprise
+
+<!--
+  Kurzer Überblick: Wir starten mit der Motivation, schauen uns dann Architektur und Visualisierung an,
+  gehen auf Datenmanagement ein und enden mit Governance und den wichtigsten Takeaways.
 -->
 
 ---

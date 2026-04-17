@@ -8,10 +8,8 @@ sectionDuration: 4m30s
 Von LocalStorage zu IndexedDB
 
 <!--
-  Die Karte sieht gut aus – aber wie halten wir die Daten dahinter aktuell?
-  In diesem Kapitel geht es um die weniger sichtbare Seite des Projekts: wie Daten effizient geladen,
-  zwischengespeichert und im Browser verwaltet werden.
-  Und wo die Grenzen des Browsers dabei liegen.
+  So viel zur Darstellung. Aber eine schöne Karte bringt nichts ohne aktuelle Daten.
+  Und genau da wird es tricky: Caching, Delta-Updates und die Grenzen des Browsers.
 -->
 
 ---
@@ -21,6 +19,7 @@ inner-split: 50
 
 ### ❌ Naiver Ansatz: alles neu laden
 
+````md magic-move {at:2}
 ```js
 async function loadActivities() {
   return await fetchStrava(
@@ -28,136 +27,126 @@ async function loadActivities() {
   )
 }
 ```
-
-<v-click>
-
-- Strava-API: max. **200 Aktivitäten pro Request**
-- Bei 1.000 Aktivitäten → **5 Requests, ~30 Sekunden**
-- Läuft schneller gegen **Rate Limits** (600 Req./15 Min, 30.000/Tag)
-- Und das, obwohl wir schon die Aktivitäten vom letzten Mal im LocalStorage haben!
-
-</v-click>
+```js
+async function loadActivities(lastSync) {
+  return await fetchStrava(
+    '/api/strava/activities',
+    { after: lastSync }
+  )
+}
+```
+````
 
 ::right::
 
 <v-click>
 
-### ✅ Ziel: nur laden, was neu ist
-
-```js
-async function loadActivities(lastFetch) {
-  return await fetchStrava(
-    '/api/strava/activities',
-    { after: lastFetch }
-  )
-}
-```
+- Strava-API: max. **200 Aktivitäten pro Request**
+- Bei 1.000 Aktivitäten → **5 Requests, ~30 Sekunden**
+- Stößt schneller an **Rate Limits** (600 Req./15 Min, 30.000/Tag)
+- Und das, obwohl wir schon die Aktivitäten vom letzten Mal im LocalStorage haben!
 
 </v-click>
-
 <v-click>
+
+### ✅ Ziel: nur laden, was neu ist
 
 **Was müssen wir dafür speichern?**
 
 - Alle bereits geladenen Aktivitäten im Browser
-- Das **Datum der letzten Abfrage** (`lastFetch`)
+- Das **Datum der letzten Synchronisation** (`lastSync`)
 
-→ Beim nächsten Aufruf: nur `after: lastFetch` anfragen
+→ Beim nächsten Aufruf: nur `after: lastSync` anfragen
 
 </v-click>
 
 <!--
   Wir haben unsere Aktivitäten im LocalStorage – aber wie hält man den Cache aktuell?
-  Der naive Ansatz: bei jedem Aufruf alles neu laden.
+  Der naive Ansatz: bei jeder Sync alles neu laden.
 
   [click] Das Problem: Die Strava-API liefert maximal 200 Aktivitäten pro Request.
-  Bei jemandem mit vielen Aktivitäten sind das mehrere Requests, mehrere Sekunden – und das frisst die Rate Limits auf.
-  600 Requests in 15 Minuten klingen viel, aber wenn man debuggt oder viel testet, ist das schnell aufgebraucht.
+  Bei vielen Aktivitäten sind das mehrere langsame Requests – und das frisst die Rate Limits auf.
 
   [click] Die bessere Lösung: ein Delta-Update.
-  Strava's Aktivitäten-Endpoint unterstützt einen `after`-Parameter – einen Unix-Timestamp.
-  Man fragt also nur ab, was seit der letzten Abfrage neu dazugekommen ist.
-
-  Dafür brauchen wir zwei Dinge im LocalStorage: die Aktivitäten selbst, und den Zeitstempel der letzten Abfrage.
-  Beim nächsten Aufruf reicht dann ein einziger Request für die neuen Aktivitäten.
+  Die API unterstützt einen `after`-Parameter – man fragt also nur ab, was seit der letzten Synchronisation neu dazugekommen ist.
 -->
 
 
 ---
 title: Das Problem mit dem Zeitstempel
+split: 57
+clicks: 6
+right:
+  hideFooter: true
+  class: bg-white
 ---
 
-`after: lastFetch` klingt einfach —
+`after: lastSync` klingt einfach —
 ist es aber nicht.
 
+<v-click at="+3">
+
+### Problem: Upload ≠ Aktivität
+
+Die API filtert nach **Aktivitätsdatum**, nicht nach Upload-Datum.
+
+→ Verspätete Uploads fallen durch den Filter.
+
+</v-click>
 <v-click>
 
-### Nachträgliche Uploads
+### Besser: `after: newestActivity`
 
-- Aktivitäten können **nachträglich hochgeladen** werden
-- Die API filtert nach **Aktivitätsdatum**, nicht nach Upload-Datum
-- Eine alte Radtour, heute importiert → altes Datum
-- Liegt vor `lastFetch` → wird nie geladen
+Das Startdatum der neuesten bekannten Aktivität statt `lastSync`.
+
+</v-click>
+<v-click>
+
+### Kein perfekter Filter möglich
+
+Ältere Uploads bleiben unsichtbar.
+
+</v-click>
+<v-click>
+
+**Fallback:** Neuladen-Button löscht den Cache.
 
 </v-click>
 
-<v-click>
+::right::
 
-### Das Risiko
-
-Wenn `after: lastFetch`:
-- Heutige Aktivität: ✅
-- Verspäteter Garmin-Sync von gestern: ❌
-- Alte Tour, heute importiert: ❌
-
-</v-click>
+<TimestampDiagram
+  :step="$clicks"
+  :activities="[
+    { label: 'Lauf 1', start: 1.2, end: 1.4, uploaded: 1.5 },
+    { label: 'Lauf 2', start: 2.3, end: 2.6, uploaded: 2.7 },
+    { label: 'Radtour', start: 3.2, end: 3.6, uploaded: 3.8 },
+    { label: 'Alte Tour', start: 0.2, end: 0.9, uploaded: 3.8, showAt: 5 },
+  ]"
+  :syncs="$clicks < 6 ? [[0, 1.8], [1, 2.8], [2, 3.7], [3, 3.9]] : [[6, 3.9]]"
+  :maxTime="5"
+  :filterMode="$clicks >= 4 ? 'newestActivity' : 'lastSync'"
+/>
 
 <!--
-  Der Delta-Ansatz hat einen Haken: Aktivitäten können nachträglich hochgeladen werden.
+  `after: lastSync` klingt nach einer einfachen Lösung – aber in der Praxis steckt der Teufel im Detail.
+  Schauen wir uns ein konkretes Beispiel an.
 
-  [click] Und die API filtert nach Aktivitätsdatum, nicht nach Upload-Datum.
-  Eine Radtour von letzter Woche, heute erst vom Garmin importiert, liegt also vor unserem `lastFetch`.
+  Am Dienstag bin ich laufen gegangen, habe die Aktivität anschließend zu Strava importiert, und dann meine Daten in den Heatmapper synchronisiert.
 
-  [click] Sie fällt durch den Filter und wird nie geladen.
--->
+  [click] Nach meinem nächsten Lauf am Mittwoch synchronisiere ich nochmal. Lauf 1 wird nicht erneut geladen – der ist ja schon im Cache.
 
----
-title: Die Heuristik
----
+  [click] Am nächsten Tag nach einer Radtour wird es problematisch. Wir synchronisieren, aber die Daten wurden noch nicht in Strava importiert.
+  
+  [click] Und wenn wir es kurz danach nochmal versuchen, klappt es trotzdem weiterhin nicht: der Filter basiert auf dem Aktivitätszeitstempel, nicht auf dem Upload-Zeitstempel. Die Radtour liegt vor der letzten Synchronisation – also wird sie nie abgefragt.
 
-```js
-async function loadActivities(newestActivity) {
-  return await fetchStrava(
-    '/api/strava/activities',
-    { after: newestActivity.date - ONE_DAY }
-  )
-}
-```
+  [click] Das lässt sich verbessern: statt `lastSync` verwenden wir das Startdatum der neuesten bereits importierten Aktivität. So laden wir zumindest ab dem Zeitpunkt, an dem wir zuletzt etwas gesehen haben. Aber auch das ist nicht perfekt.
 
-Statt `lastFetch` verwenden wir das Datum der **neuesten bekannten Aktivität** minus einen Tag –
-ein kleines Überlappungsfenster, das nachträgliche Uploads abfängt.
+  [click] Als ich meinen Fahrradcomputer mit dem Handy verbunden habe, um die Radtour zu importieren, ist mir aufgefallen, dass ich eine ältere Tour vom Montag noch nicht importiert hatte. Auch diese wird nie geladen, weil sie älter ist als die neueste Aktivität.
 
-<v-click>
-
-**Duplikate** werden beim Mergen anhand der ID dedupliziert.
-
-</v-click>
-
-<v-click>
-
-**Wenn die Heuristik versagt:** Der Sync-Button wird durch einen Neuladen-Button löscht den Cache manuell leeren und alles neu abfragen.
-
-</v-click>
-
-<!--
-  Die Lösung: statt des Zeitstempels der letzten Abfrage verwenden wir das Datum der neuesten bekannten Aktivität – und ziehen einen Tag ab.
-  Das erzeugt ein kleines Überlappungsfenster, das nachträgliche Uploads mit hoher Wahrscheinlichkeit abfängt.
-
-  [click] Duplikate, die durch das Überlappen entstehen, werden beim Mergen einfach anhand der ID dedupliziert.
-
-  [click] Und wenn die Heuristik doch mal nicht reicht – also eine Aktivität trotzdem fehlt –
-  wird der Lade-Button durch einen Neu-Laden-Button ersetzt.
-  Der Nutzer kann dann den Cache leeren und alles sauber neu abfragen.
+  [click] Es gibt keinen perfekten Filter – ältere nachträgliche Uploads lassen sich nicht zuverlässig erkennen.
+  Die pragmatische Lösung: ein Neuladen-Button, der den Cache löscht.
+  In der Praxis nutzt man das nur selten – nur wenn man neulich alte Aktivitäten nachträglich hochgeladen hat.
 -->
 
 ---
@@ -181,7 +170,7 @@ Die Routen-API hat **keinen `after`-Parameter** – weder nach Erstelldatum noch
 
 ### Die Konsequenz
 
-- Die Heuristik funktioniert hier nicht
+- Delta-Filterung ist hier nicht möglich
 - Bei jeder Synchronisation: **alle Seiten neu abfragen**
 - Routen ändern sich selten → akzeptabler Kompromiss
 
@@ -226,7 +215,7 @@ await syncRoutes()
 
 ---
 title: 5 MB reichen nicht
-inner-split: 50
+split: 50
 ---
 
 Nach mehreren Jahren und vielen Aktivitäten: **localStorage voll.**
@@ -250,21 +239,18 @@ Nach mehreren Jahren und vielen Aktivitäten: **localStorage voll.**
 
 ### Die Migration
 
-```js
-// Vorher
-localStorage.setItem('activities',
-  JSON.stringify(activities))
+```diff
+-  localStorage.setItem('activities',
+-    JSON.stringify(activities))
 
-// Nachher
-await localforage.setItem('activities',
-  activities)
++  await localforage.setItem('activities',
++    activities)
 ```
 
-API fast identisch – aber asynchron.
-
 </v-click>
-
 <v-click>
+
+<div class="h-4 mx--10 mt-6 mb-2 shrink-0 bg-white" />
 
 ### Nachteil: Debugging
 
@@ -275,25 +261,17 @@ API fast identisch – aber asynchron.
 </v-click>
 
 <!--
-  Nach mehreren Jahren und vielen hundert Aktivitäten hat mich die nächste Grenze eingeholt.
-  Zum Glück bin ich selbst ein Power-User von Strava – das Problem trat erst bei rund 3.000 Aktivitäten über mehr als 10 Jahre auf.
-  Die meisten Nutzer hätten das nie erreicht.
+  Nach mehreren Jahren hat mich die nächste Grenze eingeholt.
+  Das Problem ist erst bei rund 3.000 Aktivitäten über mehr als 10 Jahre aufgetreten — ich bin selbst Power-User von Strava.
 
-  Der Fehler war ein QuotaExceededError beim Synchronisieren – aber weil ich dort keine ordentliche Fehlerbehandlung eingebaut hatte, ist er still untergegangen.
-  Aufgefallen ist er erst beim nächsten Seitenaufruf: die neusten Aktivitäten waren einfach nicht da.
-  `localStorage` hat ein Limit von ungefähr 5 MB – das variiert allerdings je nach Browser.
+  Der Fehler war ein QuotaExceededError beim Synchronisieren, der still untergegangen ist.
+  Aufgefallen ist er erst beim nächsten Seitenaufruf: die am neuesten geladenen Aktivitäten haben einfach gefehlt.
 
   [click] Die Lösung: IndexedDB – eine echte Datenbank im Browser, ohne hartes Größenlimit.
-  Ich nutze `localforage` als Abstraktionsschicht, die eine ähnliche API wie localStorage bietet.
+  Ich nutze `localforage` als Abstraktionsschicht.
 
   [click] Die Migration war überraschend einfach: die API ist fast identisch, nur asynchron.
-  Ein paar `await` mehr, und die Daten landen in IndexedDB statt im localStorage.
 
-  Ich hatte eh schon ein Konzept für Datenmigrationen eingebaut, um bei zukünftigen Änderungen die Datenstruktur anpassen zu können – das hat mir hier sehr geholfen.
-
-  [click] Aber es gibt einen echten Nachteil beim Debugging.
-  Mit localStorage konnte ich in der Browser-Konsole direkt `localStorage.getItem('activities')` aufrufen, Daten in Variablen speichern, manuell filtern.
-  Mit localforage geht das nicht – die Library ist in der DevTools-Konsole nicht verfügbar.
-  Chrome zeigt zwar die IndexedDB-Inhalte an, aber man kann keine Queries ausführen und nichts in Variablen speichern.
-  Das macht das manuelle Debuggen deutlich mühsamer.
+  [click] Der Nachteil: Mit localStorage konnte ich in der Konsole direkt auf die Daten zugreifen und sie filtern.
+  Mit IndexedDB geht das nicht – die Daten sind nur über die Library erreichbar.
 -->

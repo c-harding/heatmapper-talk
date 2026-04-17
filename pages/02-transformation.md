@@ -8,41 +8,125 @@ sectionDuration: 3m30s
 Von der manuellen Papierkarte zur programmatischen API-Integration
 
 <!--
-  In diesem Abschnitt schauen wir uns an, wie aus der analogen Papierkarte eine programmatische API-Integration wurde.
+  Wir haben also das Problem erkannt.
+  Aber *wie* wurde aus der analogen Papierkarte eine programmatische API-Integration?
+-->
+
+---
+title: 'Der Wendepunkt: Von analog zu digital'
+split: 60
+right:
+  image: /media/derive.jpg
+  pageClass: bg-[position:33%]
+  articleClass: text-white flex flex-col justify-end text-right
+  full-color: true
+---
+
+### Der Auslöser
+
+Entdeckung des Projekts <SmartLink to="github.com/erik/derive">**dérive**</SmartLink> — ein Open-Source-Projekt, das GPX-Dateien auf einer Karte darstellt
+
+::blockquote{.font-serif.my-2}
+**GPX**  
+*GPS Exchange Format*. XML-basiertes Dateiformat für GPS-Tracks
+::
+
+::right::
+
+(<SmartLink to="https://github.com/erik/derive"><mdi-github/> erik/derive</SmartLink>)
+
+<!--
+  Den ersten Anstoß hat mir dérive gegeben — ein Open-Source-Projekt, das GPX-Dateien auf einer Karte darstellt.
+  Gefühlt war es genau das, was ich gesucht habe. Aber in der Praxis gab es ein Problem.
 -->
 
 ---
 title: Die Entscheidung für direkte API-Integration
-inner-split: 50
+articleClass: justify-around
 ---
 
-## Warum nicht bei dérive bleiben?
+<style>
+.mermaid {
+  text-align: center;
+}
+</style>
 
-### ❌ GPX-Export-Probleme
-- DSGVO: Nur noch Massenexport alle Daten
-- ZIP-Download und Import **auf Mobile fast unmöglich**
-- Manuelle Schritte bei jeder Nutzung
+<div class="transition-opacity" :class="{ 'opacity-50': $clicks >= 2 }">
 
-::right::
+### GPX-Export (dérive)
 
-<v-click>
+<v-switch>
+<template #0>
 
-## Die bessere Lösung
+```mermaid
+---
+config:
+  look: handDrawn
+  theme: neutral
+---
 
-### ✅ Direkte API-Integration
-- Strava hat eine öffentliche API
-- Jeder kann direkt auf seine Daten zugreifen
-- Ein-Klick-Zugriff ohne Downloads
-- **Mobile-first möglich**
-- Automatische Updates
+flowchart LR
+  Strava[Strava] --> Export[GPX-\nMassenexport]
+  Export --> Import[In dérive\nimportieren]
+  Import --> Karte[🗺️ Karte]
 
-</v-click>
+  classDef bad fill:#ffebee
+  class Export,Warten,ZIP,Entpacken,Import bad
+```
+
+</template>
+<template #1-3>
+
+```mermaid
+---
+config:
+  look: handDrawn
+  theme: neutral
+---
+
+flowchart LR
+  Strava[Strava] --> Export[DSGVO-\nMassenexport]
+  Export --> Warten@{ shape: delay, label: "⏳ 1 Stunde" }
+  Warten --> ZIP[ZIP\nherunterladen]
+  ZIP --> Import[In dérive\nimportieren]
+  Import --> Karte[🗺️ Karte]
+
+  classDef bad fill:#ffebee
+  class Export,Warten,ZIP,Entpacken,Import bad
+```
+
+</template>
+</v-switch>
+
+</div>
+
+<div v-click="2">
+
+### Direkte API-Integration
+
+```mermaid
+---
+config:
+  look: handDrawn
+  theme: neutral
+---
+
+flowchart LR
+  Strava[Strava] --> API[Strava API]
+  API --> Heatmapper[Heatmapper]
+  Heatmapper --> Karte[🗺️ Karte]
+
+  classDef good fill:#e8f5e9
+  class API,Heatmapper good
+```
+
+</div>
 
 <!--
-  Warum bin ich nicht einfach bei dérive geblieben?
-  Das Problem war der GPX-Export-Workflow.
-  Durch die DSGVO gab es bei Strava nur noch einen Massenexport aller Daten – kein einzelner Export mehr.
-  Das heißt: ZIP herunterladen, entpacken, importieren – auf dem Handy praktisch unmöglich.
+  dérive basiert auf GPX-Dateien — man muss also seine Daten aus Strava exportieren.
+
+  [click] Durch die DSGVO gab es aber nur noch einen Massenexport aller Daten – nicht nur GPX-Daten.
+  Das heißt: eine Stunde warten, ZIP herunterladen, entpacken, importieren – auf dem Handy praktisch unmöglich.
 
   [click] Die bessere Lösung: Strava hat eine öffentliche API, über die man direkt auf seine Daten zugreifen kann.
   Ein Klick, kein Download, mobile-first möglich und automatische Updates.
@@ -50,21 +134,23 @@ inner-split: 50
 
 ---
 title: Erste technische Entscheidungen
-inner-split: 50
+split: 60
+right:
+  full-color: true
 ---
 
-## Brauchen wir ein Backend?
+## Brauchen wir ein Backend? {v-click}
 
 <v-click>
 
 ### Ja, aber minimal!
 
-**Problem:** API-Token können nicht im Frontend gespeichert werden
+**Problem:** API-Tokens von Strava dürfen nicht im Frontend gespeichert werden
 
 **Lösung:** Backend nur für Token-Management
 - **Strava OAuth-Flow** abwickeln  
 - **API-Token sicher speichern**
-- Session-Token an Frontend weiterreichen
+- **Session-Token** ans Frontend weiterreichen
 
 </v-click>
 
@@ -75,15 +161,17 @@ inner-split: 50
 ## Architektur-Prinzip
 
 ### Backend: So wenig wie möglich
+
 - Storage ist teuer, wenn die App skaliert
 
-### Ergebnis
 - Minimale Backend-Kosten
 
 </v-click>
 
 <!--
-  Die nächste Frage war: Brauchen wir ein Backend?
+  Die API-Integration steht also als Richtung fest. Aber wie sieht die Umsetzung aus?
+
+  [click] Die erste Frage war: Brauchen wir ein Backend?
 
   [click] Ja, aber so minimal wie möglich.
   API-Token dürfen nicht im Frontend gespeichert werden – das Backend übernimmt also nur den OAuth-Flow und das Token-Management.
@@ -96,7 +184,7 @@ title: Die Architektur im Überblick
 articleClass: justify-center
 ---
 
-<v-switch at="0">
+<v-switch>
 <template #0>
 
 ```mermaid
@@ -158,43 +246,6 @@ flowchart LR
 
     User --> Frontend
     Frontend --> Backend
-    Backend --> StravaAPI
-    StravaAPI --> StravaDB
-
-    classDef minimal fill:#e1f5fe
-    classDef frontend fill:#f3e5f5  
-    classDef external fill:#fff3e0
-    
-    class Backend minimal
-    class Frontend frontend
-    class StravaAPI,StravaDB external
-```
-
-</template>
-<template #2>
-
-```mermaid
----
-config:
-  look: handDrawn
-  theme: neutral
----
-
-flowchart LR
-    User[👤 Nutzer]
-
-    subgraph Heatmapper
-      Frontend[🖥️ Frontend \n Vue]
-      Backend[⚙️ Backend \n Node/Express]
-    end
-
-    subgraph Strava
-      StravaAPI[Strava API]
-      StravaDB[(Strava Datenbank)]
-    end
-
-    User --> Frontend
-    Frontend --> Backend
     Backend -- $ --> StravaAPI
     StravaAPI --> StravaDB
 
@@ -208,7 +259,7 @@ flowchart LR
 ```
 
 </template>
-<template #3>
+<template #2>
 
 ```mermaid
 ---
@@ -249,7 +300,7 @@ flowchart LR
 ```
 
 </template>
-<template #4>
+<template #3>
 
 ```mermaid
 ---
@@ -288,7 +339,7 @@ flowchart LR
 ```
 
 </template>
-<template #5>
+<template #4>
 
 ```mermaid
 ---
@@ -332,7 +383,7 @@ flowchart LR
 ```
 
 </template>
-<template #6>
+<template #5-6>
 
 ```mermaid
 ---
@@ -386,27 +437,22 @@ flowchart LR
 <!--
   Schauen wir uns nun die Architektur an.
   Im einfachsten Fall brauchen wir nur ein Frontend, ein Backend und eine Verbindung zur Strava-API.
-  Diese API holt dann die Daten aus Stravas Datenbank.
 
-  [click] Als Frontend habe ich Vue.js gewählt, da das 2020 die Frontend-Bibliothek war, mit der ich am meisten Erfahrung hatte.
-  Das Backend läuft in Node.js, sodass ich Code für Datenstrukturen zwischen Frontend und Backend teilen kann.
+  [click] Als Frontend habe ich Vue.js gewählt, das Backend läuft in Node.js, sodass ich Code für Datenstrukturen zwischen Frontend und Backend teilen kann.
 
-  [click] Die Verbindung zu Strava hat ein Rate Limit und ist nicht besonders schnell.
-  Das heißt, ich möchte wiederholte Anfragen minimieren – es würde also helfen, Caching in die Architektur einzubauen.
+  Die Verbindung zu Strava hat ein Rate Limit – ich möchte also wiederholte Anfragen minimieren.
 
-  [click] Ich könnte eine Datenbank ans Backend hängen, aber das würde bei Skalierung teuer werden und den Durchsatz im System erhöhen.
+  [click] Ich könnte als Cache eine Datenbank ans Backend hängen, aber das würde bei Skalierung teuer werden.
 
-  [click] Inzwischen bieten moderne Browser gute Speichermöglichkeiten.
-  Da die Daten eines einzelnen Nutzers nicht besonders groß sind, sollten sie in den Local Storage passen.
+  [click] Stattdessen habe ich Local Storage im Browser gewählt. Die Daten eines einzelnen Nutzers sind nicht besonders groß.
 
-  [click] In diesem Diagramm fehlt noch etwas: Wir brauchen Karten.
+  [click] Außerdem brauchen wir Karten.
+  Das war kurz nachdem Google Maps sein Preismodell umgestellt hatte – die Kosten pro Seitenaufruf sind um das 14-Fache gestiegen.
+  Vielleicht erinnert ihr euch daran, wie plötzlich auf dutzenden Websites die Karten ausgegraut waren, mit der Meldung *„This page can't load Google Maps correctly."*
 
-  Das war kurz nachdem Google Maps sein Preismodell umgestellt hatte – das kostenlose Kontingent wurde massiv reduziert und die Kosten pro Seitenaufruf sind im Schnitt um das 14-fache gestiegen.
-  Vielleicht erinnert ihr euch daran, wie plötzlich auf dutzenden Websites die Karten ausgegraut ware, mit der Meldung *„This page can't load Google Maps correctly.“*
+  [click] Strava selbst war vor kurzem auf Mapbox umgestiegen. Mapbox hat ein großzügiges kostenloses Kontingent, das ich bis heute nicht überschritten habe.
 
-  [click] Strava selbst war kurz zuvor ebenfalls auf eine Alternative umgestiegen: Mapbox.
-  Mapbox hatte ein großzügiges kostenloses Kontingent – so großzügig, dass ich es bis heute nicht überschritten habe.
-  Und es hatte den Vorteil, dass die Karten in Heatmapper genauso aussehen wie in Strava selbst.
+  So sieht also die fertige Architektur aus.
 -->
 
 ---
@@ -430,7 +476,7 @@ Perfekt für Kartenvisualisierung: kein Detail-Endpoint nötig. Eine Aktivität 
 
 ::right::
 
-````md magic-move {at: 0}
+````md magic-move {at: 1}
 ```json
 // GET /api/strava/activities?per_page=200
 [
@@ -470,18 +516,15 @@ Perfekt für Kartenvisualisierung: kein Detail-Endpoint nötig. Eine Aktivität 
 ````
 
 <!--
-  Was bekommt man eigentlich von der Strava-API?
-  Keine GPX-Dateien – stattdessen ein Array von kompakten JSON-Objekten, eines pro Aktivität.
-  Die Antwort ist paginiert: bis zu 200 Aktivitäten pro Anfrage.
+  Was bekommt man von der Strava-API?
+  Keine GPX-Dateien – stattdessen kompakte JSON-Objekte, paginiert mit bis zu 200 pro Anfrage.
 
-  [click] Das Herzstück ist das Feld `map.summary_polyline`.
-  Das ist eine Encoded Polyline (Google Polyline Algorithm) – ein von Google entwickeltes Format, das GPS-Koordinaten als kompakten ASCII-String kodiert.
-  Eine Route mit hunderten Punkten wird zu einem kurzen String.
-  Das ist genau das Format, das Kartenbibliotheken wie Mapbox direkt verstehen – kein Detail-Endpoint, keine großen Dateidownloads.
+  [click] Das Herzstück: `map.summary_polyline` – eine Encoded Polyline, und die GPS-Koordinaten als kompakten String kodiert.
+  Mapbox versteht dieses Format direkt. Es ist kein Detail-Endpoint nötig, die Datenmenge pro Aktivität schrumpft von Megabyte auf Kilobyte.
 
-  Die Datenmenge pro Aktivität schrumpft dadurch von mehreren Megabyte auf wenige Kilobyte – perfekt für die Kartenvisualisierung.
+  ---
 
-  Wie ist das möglich? Die Encoded Polyline nutzt eine Kombination aus Delta-Kodierung (nur die Unterschiede zwischen Punkten speichern) und Base64-ähnlicher Kodierung, um die Daten stark zu komprimieren. Die Pünkte werden auch gefiltert: Wenn mehrere Punkte in einer geraden Linie liegen, werden die mittleren Punkte weggelassen, was die Datenmenge weiter reduziert.
+  [click] *Wie ist das möglich? Die Encoded Polyline nutzt eine Kombination aus Delta-Kodierung (nur die Unterschiede zwischen Punkten speichern) und Base64-ähnlicher Kodierung, um die Daten stark zu komprimieren. Die Punkte werden auch gefiltert: Wenn mehrere Punkte in einer geraden Linie liegen, werden die mittleren Punkte weggelassen, was die Datenmenge weiter reduziert. Außerdem fehlen Zeitstempel pro Punkt — es ist eine reine Geometrie, keine vollständige Aufzeichnung. Für eine Heatmap reicht das völlig aus.*
 -->
 
 ---

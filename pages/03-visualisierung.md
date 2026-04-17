@@ -8,9 +8,8 @@ sectionDuration: 4m
 Von klassischen Slippy Maps zu Vektor-basierten Karten
 
 <!--
-  Die Architektur steht, die API liefert Daten – jetzt kommt der sichtbarste Teil des Projekts: die Karte.
-  In diesem Kapitel schauen wir uns an, wie moderne Web-Karten funktionieren, warum ich Mapbox gewählt habe,
-  und wie aus rohen Polylinien eine echte Heatmap wird.
+  Die Architektur steht, die API liefert Daten – jetzt kommt der sichtbarste Teil: die Karte.
+  Wie funktionieren moderne Web-Karten, und wie wird aus rohen Polylines eine Heatmap?
 -->
 
 ---
@@ -29,7 +28,7 @@ right:
 
 ### Vektor-Karten
 - Server liefert **Geodaten** (Geometrien, Labels)
-- **Client rendert** die Karte in WebGL
+- **Client rendert** die Karte per WebGL
 - Beliebiger Zoom, Rotation und Neigung
 - Dynamisches Styling zur Laufzeit
 
@@ -46,22 +45,22 @@ right:
 
 <div v-click="2" class="flex h-10em gap-4">
   <img src="/media/vector-muc.png" class="h-full aspect-square" />
-  <div v-click="3" class="rounded-full overflow-hidden border-4 border-black w-10em h-10em bg-white">
+  <div class="rounded-full overflow-hidden border-4 border-black w-10em h-10em bg-white">
     <pre class="whitespace-pre-line break-all mr--1">01aaf7e0a0e77617465725f706f6c79676f6e7312251204000001011803221b098a16ee1d5202020810020600020102050000010307010500030f12251204000001021803221b09a016b01e52070d0403050101010109000106010608040a00120f12171204000001031803220d098617ec1f1a06120700030f0f12191204000001041803220f09ac17921d220e06040e130c0b1b0f12171204000001051803220d09d817a2191a061a0d0203150f121712040000</pre>
   </div>
 </div>
 
 <!--
-  Kurz zur Technologie.
-  Die erste Generation von Web-Karten, bekannt als Slippy Maps, funktioniert mit Raster-Kacheln.
-  Der Server rendert die Karte als Bild und schickt sie Kachel für Kachel – der Browser zeigt sie nur an.
-  Das ist einfach und gut etabliert, aber inflexibel.
+  Bevor wir eine Heatmap bauen können, müssen wir verstehen, wie Web-Karten überhaupt funktionieren.
+  Es gibt zwei Generationen – und der Unterschied ist entscheidend:
 
-  [click] So sieht eine Kachel aus, wenn man reinzoomt – sie wird pixelig, weil es ein Bild ist. Erst danach werden neue Kacheln geladen.
+  Raster-Karten, auch Slippy Maps genannt. Der Server rendert die Karte als Bild, der Browser zeigt sie nur an.
 
-  [click] Moderne Vektor-Karten wie Mapbox GL funktionieren anders: Der Server schickt Rohdaten, und der Browser rendert die Karte selbst in WebGL.
-  Das bedeutet: beliebiger Zoom ohne Qualitätsverlust, Rotation – und dynamisches Styling, das sich zur Laufzeit ändern lässt.
-  Genau das brauchen wir für eine Heatmap.
+  [click] Reinzoomen zeigt das Problem – die Kachel wird pixelig, bis die Kacheln mit höherer Auflösung nachgeladen werden.
+
+  [click] Vektor-Karten wie Mapbox GL funktionieren anders: Der Server schickt keine Bilder, sondern Geodaten.
+  Der Browser rendert die Karte selbst per WebGL.
+  Beliebiger Zoom, Rotation und dynamisches Styling – genau das brauchen wir.
 -->
 
 ---
@@ -72,7 +71,7 @@ inner-split: 50
 **Source**: die Datenschicht
 
 - Enthält Rohdaten (GeoJSON, Raster-Kacheln, …)
-- Unsere Activities: GeoJSON aus dekodierten Polylinien
+- Unsere Activities: GeoJSON aus dekodierten Polylines
 
 <v-click at="+2">
 
@@ -82,19 +81,18 @@ inner-split: 50
 - Mehrere Layer pro Source möglich
 
 </v-click>
-
 <v-click>
 
 **Style**: der Kartenstil
 
 - Definiert Hintergrund, Straßen, Labels
-- Bestehen aus Source- und Layer-Definitionen
+- Besteht aus Source- und Layer-Definitionen
 
 </v-click>
 
 ::right::
 
-````md magic-move {at: 0}
+````md magic-move {at: 1}
 ```js {*}
 map.addSource('activities', {
   type: 'geojson',
@@ -156,11 +154,35 @@ map.addLayer({
 ```
 ````
 
+<script setup>
+import { useSlideContext, useNav, useIsSlideActive } from '@slidev/client'
+import { watch } from 'vue'
+
+const nav = useNav()
+const active = useIsSlideActive()
+
+// Auto-advance/rewind on click 1, with 1.2s delay to allow the code transition to complete.
+// This fixes a mismatch in the code animation.
+
+watch([active, nav.clicks], ([isActive, clicks], [wasActive, oldClicks]) => {
+  if (isActive && clicks === 1 && wasActive) {
+    const timer = setTimeout(() => {
+      if (active.value && nav.clicks.value === 1) {
+        clicks > oldClicks ? nav.next() : nav.prev()
+      }
+    }, 1200)
+    const unwatch = watch([active, nav.clicks], () => {
+      clearTimeout(timer)
+    }, { once: true })
+  }
+})
+</script>
+
 <!--
   Mapbox GL hat drei Kernkonzepte: Source, Layer und Style.
   Unsere Activities kommen als GeoJSON-Source rein.
 
-  [click] Der Layer definiert, wie die Daten aussehen – Typ, Farbe, Transparenz.
+  [click:2] Der Layer definiert, wie die Daten aussehen – beispielsweise Farbe, Transparenz.
 
   [click] Und alles baut auf einem Style auf – einer Basiskarte, die man fertig laden oder selbst definieren kann.
 -->
@@ -255,7 +277,7 @@ transition: fade
 
   [click] Dazu eine Sidebar für die Bedienelemente.
 
-  [click] Logo und Sync-Button.
+  [click] Ein Logo und ein Sync-Button.
 
   [click] Und darunter die Liste der Aktivitäten.
 
@@ -287,11 +309,11 @@ left:
 
 ::right::
 
-Wie kriegt man diese Farben hin?
+Je mehr Routen sich überlagern, desto wärmer die Farbe — aber wie?
 
 <v-click>
 
-Lösung: Mehrere Layer
+Mehrere halbtransparente Layer übereinander:
 
 - Layer `1`: `#00F` <div class="w-1em h-1em bg-[#00F] inline-block" /> × `75%`
   <Line :count="4" class="h-2em inline" color="#00F" :opacity="0.75" />
@@ -313,12 +335,12 @@ Lösung: Mehrere Layer
 </v-click>
 
 <!--
-  Wie entstehen eigentlich diese Farben auf der Heatmap?
-  
-  [click] Die Antwort: Mehrere halbtransparente Layer übereinander.
-  Ein blauer Layer mit 75 % Opacity, ein roter mit 20 % und ein gelber mit 10 %.
-  
-  [click] Überlagert man die, ergibt sich der typische Heatmap-Farbverlauf – von violett bis orange, je nachdem wie viele Linien sich überlagern.
+  Je mehr Routen sich überlagern, desto wärmer wird die Farbe. Daher kommt das Wort „Heatmap“. Aber wie funktioniert das technisch?
+
+  [click] Die Lösung: Drei halbtransparente Layer übereinander.
+  Blau mit 75 % Opacity, Rot mit 20 % und Gelb mit 10 %.
+
+  [click] Überlagern sich viele Linien, addieren sich die Farben — von kaltem Violett bis hin zu warmem Orange.
 -->
 
 ---
@@ -353,7 +375,7 @@ map.setTerrain({ source: 'terrain' })
 
 ::right::
 
-<v-switch at="0" class="h-full *:h-full">
+<v-switch class="h-full *:h-full" at="1">
   <template #1>
     <img src="/media/globe.png" class="w-full h-full object-cover" />
   </template>
@@ -363,15 +385,10 @@ map.setTerrain({ source: 'terrain' })
 </v-switch>
 
 <!--
-  Mapbox hat danach kontinuierlich neue Features eingeführt – kostenlos nutzbar mit wenigen Zeilen Code.
-  Das Schöne an einer gut abstrahierten Bibliothek: man profitiert davon fast automatisch.
+  Mapbox hat danach neue Features eingeführt – kostenlos nutzbar mit wenigen Zeilen Code.
 
-  [click] Globusansicht: eine einzige Zeile Code, und die Karte wird zur Weltkugel – sobald man weit genug herauszoomt.
-  Das ist besser als die Mercator-Projektion, die viele Online-Karten nutzen: Mercator verzerrt die Größen stark, vor allem in den polaren Regionen.
+  [click] Globusansicht: eine einzige Zeile, und die Karte wird zur Weltkugel.
 
-  [click] 3D-Terrain: ein paar Zeilen mehr, und die Karte bekommt echte Höhenprofile.
-  Wanderungen in den Alpen sehen plötzlich ganz anders aus – man sieht sofort, wie bergig eine Route war.
-  Besonders beeindruckend in Kombination mit Satellitenbildern als Hintergrundkarte.
-
+  [click] 3D-Terrain: ein paar Zeilen mehr, und die Karte bekommt echte Höhenprofile – besonders beeindruckend mit Satellitenbildern.
   Das ist der Vorteil einer gepflegten externen Bibliothek: neue Features geschenkt.
 -->
