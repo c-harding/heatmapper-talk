@@ -23,6 +23,9 @@ importers:
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
+      slidev-addon-timing-bar:
+        specifier: ^0.1.0
+        version: 0.1.0(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))(vue@3.5.31(typescript@5.9.3))
       vue:
         specifier: ^3.5.29
         version: 3.5.31(typescript@5.9.3)
@@ -2517,6 +2520,11 @@ packages:
 
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
+
+  slidev-addon-timing-bar@0.1.0:
+    resolution: {integrity: sha512-0cWWoSqzRaDsu2GIJSeBSzB7Nr3sQc3z/zfu6BQRuL8WTr69a9tfjl/eaPByiepKeOOF6Pyj4Ebblqe63HNorA==}
+    peerDependencies:
+      vue: ^3.5.0
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
@@ -5917,6 +5925,28 @@ snapshots:
       totalist: 3.0.1
 
   sisteransi@1.0.5: {}
+
+  slidev-addon-timing-bar@0.1.0(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))(vue@3.5.31(typescript@5.9.3)):
+    dependencies:
+      '@slidev/client': 52.14.2(@nuxt/kit@3.21.2)(@vue/compiler-sfc@3.5.31)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.3))
+      vue: 3.5.31(typescript@5.9.3)
+    transitivePeerDependencies:
+      - '@nuxt/kit'
+      - '@pinia/colada'
+      - '@svgr/core'
+      - '@svgx/core'
+      - '@unocss/astro'
+      - '@unocss/postcss'
+      - '@unocss/webpack'
+      - '@vue/compiler-sfc'
+      - magicast
+      - markdown-it-async
+      - pinia
+      - react
+      - solid-js
+      - supports-color
+      - svelte
+      - vite
 
   source-map-js@1.2.1: {}
 

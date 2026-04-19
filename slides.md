@@ -4,14 +4,17 @@ layout: ec26
 title: Heatmapper
 shortTitle: Titel
 duration: 25m
-sectionDuration: 1m
-end-time: '14:10'
+section:
+  duration: 1m
+endTime: '14:10'
 author: Charlie Harding · QAware GmbH
 authorUrl: qaware.de
 articleClass: mr-55%
 comark: true
 htmlAttrs:
   lang: de-DE
+addons:
+  - 'slidev-addon-timing-bar'
 ---
 
 Digitale Transformation mit fremden APIs —

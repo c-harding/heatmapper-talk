@@ -6,6 +6,11 @@
       "sourceType": "github",
       "computedHash": "ae96487f210cf7c082621e28ebb5cd7f867ee0b99d74bf6120ac4085abd4859c"
     },
+    "slidev-addon-timing-bar": {
+      "source": "c-harding/slidev-addon-timing-bar",
+      "sourceType": "github",
+      "computedHash": "a30abc1155736d55ac01e3342a2ce99ed98ce92426f4f3be6d200eda323d1586"
+    },
     "slidev-qaware-theme": {
       "source": "qaware-internal/slidev-theme-qaware",
       "sourceType": "github",

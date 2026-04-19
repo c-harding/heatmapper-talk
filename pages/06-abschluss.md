@@ -1,7 +1,8 @@
 ---
 layout: chapter
 title: Takeaways
-sectionDuration: 1m
+section:
+  duration: 1m
 ---
 
 Learnings für Hobby-Projekte und Enterprise-Software
