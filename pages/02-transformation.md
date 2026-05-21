@@ -3,7 +3,7 @@ layout: chapter
 title: Problem erkannt, Transformation gestartet
 shortTitle: Transformation
 section:
-  duration: 4m
+  duration: 2m
 ---
 
 Von der manuellen Papierkarte zur programmatischen API-Integration
@@ -125,6 +125,8 @@ flowchart LR
 
 <!--
 dérive basiert auf GPX-Dateien — man muss also seine Daten aus Strava exportieren.
+
+Das war am Anfang relativ simpel, aber so ist es leider nicht geblieben.
 
   [click] Durch die DSGVO gab es aber nur noch einen Massenexport aller Daten – nicht nur GPX-Daten.
   Das heißt: eine Stunde warten, ZIP herunterladen, entpacken, importieren – auf dem Handy praktisch unmöglich.
