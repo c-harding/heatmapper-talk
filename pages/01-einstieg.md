@@ -48,37 +48,20 @@ left:
 
 <!--
 Darauf habe ich angefangen, jede Wanderung, jeden Lauf, jede Radtour von Hand einzuzeichnen.
-  Parallel habe ich alles mit Strava aufgezeichnet – das ist eine Art soziales Netzwerk für Sportler, auf dem man Touren teilen kann.
+
+[click] Parallel habe ich alles mit Strava aufgezeichnet – das ist eine Art soziales Netzwerk für Sportler, auf dem man Touren teilen kann.
 -->
 
 ---
 title: Warum Digitalisierung?
-inner-split: 50
 ---
 
-## Das Problem der analogen Lösung
-
-### ❌ Limitierungen
-
-- Nur ein geografischer Ausschnitt
-- Keine Filterung nach Zeit
-- Die Karte ist nicht immer dabei
-- Es kostet Zeit, jede Aktivität einzuzeichnen
-
-::right::
-
-## &nbsp;
-
-<v-click>
-
-### ✅ Digitale Möglichkeiten
-
-- Globale Darstellung, beliebige Zoom-Level
-- Filterung nach Zeit, Sportart, etc.
-- Immer abrufbar
-- Automatische Updates
-
-</v-click>
+|                   | **Analog**                          | <span v-click="1">**Digital**</span>                                   |
+| ----------------- | ----------------------------------- | ---------------------------------------------------------------------- |
+| **Gebiet**        | Nur ein geografischer Ausschnitt    | <span v-click="1">Globale Darstellung, beliebige Zoom-Level</span>     |
+| **Filterung**     | Keine Filterung nach Zeit           | <span v-click="1">Filterung nach Zeit, Sportart, etc.</span>           |
+| **Verfügbarkeit** | Die Karte ist nicht immer dabei     | <span v-click="1">Immer abrufbar</span>                                |
+| **Aufwand**       | Jede Aktivität von Hand einzeichnen | <span v-click="1">Automatische Updates</span>                          |
 
 <!--
 Irgendwann wird klar: Die analoge Lösung hat echte Grenzen.

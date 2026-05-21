@@ -95,19 +95,3 @@ src: ./pages/01-einstieg.md
 ---
 src: ./pages/02-transformation.md
 ---
-
----
-src: ./pages/03-visualisierung.md
----
-
----
-src: ./pages/04-datenmanagement.md
----
-
----
-src: ./pages/05-governance.md
----
-
----
-src: ./pages/06-abschluss.md
----
