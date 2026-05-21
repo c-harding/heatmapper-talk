@@ -39,7 +39,12 @@ left:
 - Kostenlose Landkarte vom Alpenverein (München, 2018)
 - Jede Wanderung, jeden Lauf, jede Radtour **von Hand eingezeichnet**
 - Physische Visualisierung aller Outdoor-Aktivitäten
+
+<v-click>
+
 - Aber: Parallel digitale Aufzeichnung mit Strava
+
+</v-click>
 
 <!--
 Darauf habe ich angefangen, jede Wanderung, jeden Lauf, jede Radtour von Hand einzuzeichnen.
